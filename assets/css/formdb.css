@@ -1,0 +1,296 @@
+.fa {
+    display: block;
+  }
+  
+  
+  .edit-input,
+  .edit-textarea {
+    border: none;
+    box-sizing: content-box;
+    font-size: 14px;
+    margin: 0 30px;
+    position: relative;
+    resize: none;
+    width: calc(100% - 200px);
+  }
+  
+  .edit-input:focus,
+  .edit-textarea:focus {
+    outline: none;
+    border-bottom: solid 2px #DFE0E2;
+  }
+  
+  .placeholder .edit-input, .placeholder
+  .edit-textarea {
+    color: #A4A5A8;
+  }
+  
+  .placeholder {
+    color: #A4A5A8;
+  }
+  
+  .edit-textarea {
+    margin: 10px 30px;
+    max-height: 100px;
+    min-height: 50px;
+    width: calc(100% - 60px);
+  }
+  
+ 
+  
+  .list-item {
+    background: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0px 0px 5px 1px #ccc;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 30px;
+    max-height: 70px;
+    overflow: hidden;
+    text-overflow: hidden;
+    transition: max-height 0.2s linear;
+    width: 100%;
+  }
+  
+  .list-item-title {
+    color: #ffffff;
+    background-color: #48c1ff;
+    border-radius: 4px 0 0 4px;
+    box-shadow: 0px 0px 5px 1px #ccc;
+    float: left;
+    height: 70px;
+    line-height: 70px;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all 0.2s linear,  width 0.1s linear 0.1s,  margin 0.1s linear 0.1s;
+    width: 100px;
+  }
+  
+  .list-item-title-text {
+    opacity: 1;
+    transition: opacity 0.3s linear;
+  }
+  
+  .list-item-title-icon {
+    opacity: 0;
+    font-size: 40px;
+    width: 100px;
+    position: absolute;
+    transition: all 0.3s linear,  width 0.1s linear 0.1s;
+  }
+  
+  .list-item-content-name {
+    font-weight: bold;
+    line-height: 70px;
+    margin-left: 130px;
+    padding-top: 0;
+    transition: padding-top 0.2s linear, margin-left 0.2s linear;
+  }
+  
+  .list-item-content-text {
+    position: relative;
+    margin-bottom: 2px;
+  }
+  
+  .list-item-content-text:hover:after {
+    color: #A4A5A8;
+    /* content: "\f000"; */
+    /* font-family: "gravity-glyphicons"; */
+    content: "\f000";
+    height: 10px;
+    margin-left: calc(100% - 35px);
+    margin-top: -20px;
+    position: absolute;
+    width: 10px;
+    z-index: 1;
+  }
+  
+  .list-item-content-text.textarea:hover:after {
+    content: '\f000';
+  }
+  
+  .list-item.active {
+    max-height: 500px;
+    transition: max-height 0.2s linear 0.1s;
+  }
+  
+  .list-item.active .edit-input {
+    width: calc(100% - 60px);
+  }
+  
+  .list-item.active .list-item-title {
+    border-radius: 50%;
+    height: 50px;
+    margin-top: -25px;
+    margin-left: 20px;
+    position: absolute;
+    transition: all 0.2s linear 0.1s,  width 0.1s linear,  margin 0.1s linear;
+    width: 50px;
+  }
+  
+  .list-item.active .list-item-title-text {
+    font-size: 10px;
+    line-height: 50px;
+    opacity: 0;
+  }
+  
+  .list-item.active .list-item-title-icon {
+    font-size: 25px;
+    opacity: 1;
+    line-height: 50px;
+    width: 51px;
+  }
+  
+  .list-item.active .list-item-content-name {
+    margin-left: 30px;
+    padding-top: 10px;
+    transition: margin-left 0.2s linear,  width 0.1s linear;
+  }
+  
+  .board {
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0px 0px 5px 1px #ccc;
+    height: calc(100vh - 200px);
+    min-height: 400px;
+    max-height: 780px;
+    padding: 10px 0;
+    overflow: auto;
+  }
+  
+  .board .edit-input,
+  .board .edit-textarea {
+    margin: 0;
+    width: 100%;
+  }
+  
+  .board-title {
+    background-color: #48c1ff;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px 1px #ccc;
+    color: #ffffff;
+    font-size: 25px;
+    height: 50px;
+    line-height: 53px;
+    margin: -35px 0 0 25px;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    width: 50px;
+  }
+  
+  .board-item {
+    box-sizing: border-box;
+    display: inline-block;
+    margin-top: 20px;
+    padding: 0 15px;
+    width: 100%;
+  }
+  
+  .board-item-key, .board-item-value {
+    float: left;
+    margin: 0 15px;
+    position: relative;
+    width: calc(50% - 30px);
+  }
+  
+  .board-item-key {
+    text-align: right;
+  }
+  
+  .board-item-key.required:after {
+    background-color: #ff642d;
+    border-radius: 50%;
+    content: '';
+    height: 4px;
+    margin-left: 5px;
+    margin-top: 5px;
+    position: absolute;
+    width: 4px;
+  }
+  
+  .board-item-value .edit-input,
+  .board-item-value .edit-textarea {
+    font-weight: bold;
+  }
+  
+  .board-item-value:hover:after {
+    color: #A4A5A8;
+    content: "\f000";
+    font-family: "gravity-glyphicons";
+    height: 10px;
+    margin-left: calc(100% - 20px);
+    margin-top: -20px;
+    position: absolute;
+    width: 10px;
+  }
+  
+  .board-item-value.checkbox:hover:after {
+    content: '';
+  }
+  
+  .cb-label {
+    color: #282828;
+    float: left;
+    margin-left: 10px;
+  }
+  
+  .cb-gravity {
+    left: -9999px;
+    position: absolute;
+  }
+  
+  .cb-gravity + label {
+    background-color: #ffffff;
+    border: solid 2px #cccccc;
+    cursor: pointer;
+    display: inline-block;
+    height: 10px;
+    margin: 0;
+    position: relative;
+    transition: background-color 0.2s,  box-shadow 0.2s;
+    user-select: none;
+    width: 10px;
+  }
+  
+  .cb-gravity + label::before {
+    content: '';
+    background-color: #fff;
+    display: none;
+    height: 9px;
+    left: 5px;
+    position: absolute;
+    top: 0.5px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 2px;
+  }
+  
+  .cb-gravity + label::after {
+    background-color: #fff;
+    content: '';
+    height: 2px;
+    left: 0px;
+    position: absolute;
+    top: 5px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    width: 4px;
+  }
+  
+  .cb-gravity:checked + label {
+    background: #48c1ff;
+    border-color: #48c1ff;
+  }
+  
+  .cb-gravity:checked + label::before {
+    display: block;
+  }
+  
+  .cb-gravity:checked + label::after {
+    display: block;
+  }

@@ -1,0 +1,39 @@
+.bgblue{
+    background-color: #48C1FF;
+    color:white;
+    font-variant: small-caps;
+    font-weight: 400;
+    font-size: 20px;
+}
+.border{
+    box-shadow: 1px 1px 7px #696969;
+}
+
+.inputCheck{
+    border-left-width: 10px;
+    border-left-color: #48C1FF;
+    border-right-color: #48C1FF;
+    border-right-width: 10px;
+   
+
+}
+.tabelaCheck{
+    border-left-width: 10px;
+    border-left-color: #48C1FF;
+    border-right: none;
+    border-right-color: #48C1FF;
+    
+    
+
+}
+.button{
+    box-shadow: 1px 1px 7px #B5B5B5;
+}
+body{
+    background-color: #eee;
+}
+.footer-space{height: 50px;width: auto}
+
+.newBloco{
+    display: block;border-left-width: 1px;border-left-style: solid;border-left-color: #48C1FF ;padding-left: 15px;
+}
