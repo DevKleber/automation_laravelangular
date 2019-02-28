@@ -3,32 +3,32 @@
 $cifrao = "$";
 $gridmodulo ='';
 $gridmodulo2 = '';
-$c = ucfirst($nameMod);
+$c = ucfirst($nameComponent);
 
 $gridmodulo .= "<?php
 
 class ".$c."
 {
-    var $cifrao"."modName = '$nameMod';
+    var $cifrao"."modName = '$nameComponent';
 
     public function __construct()
     {
-        $cifrao"."this->$nameMod = $cifrao"."this->get$c();
+        $cifrao"."this->$nameComponent = $cifrao"."this->get$c();
         
         if ($cifrao"."_GET['tipo_url']) {
             $cifrao"."this->seo['title'] = $cifrao"."this->tipo['titulo'] . ' - ' . $cifrao"."this->seo['title'];
-            $cifrao"."this->$nameMod = $cifrao"."this->detail$c($cifrao"."_GET['tipo_url']);
+            $cifrao"."this->$nameComponent = $cifrao"."this->detail$c($cifrao"."_GET['tipo_url']);
             
             $cifrao"."this->seo = array(
-                'title'    => $cifrao"."this->$nameMod[0]['titulo'] . ' - $c',
-                'keywords' => '$nameMod, contacto, entre em contacto, MVP Gás',
-                'description' => strip_tags(explode('\\n',$cifrao"."this->$nameMod[0]['conteudo'])[0])
+                'title'    => $cifrao"."this->$nameComponent[0]['titulo'] . ' - $c',
+                'keywords' => '$nameComponent, contacto, entre em contacto, MVP Gás',
+                'description' => strip_tags(explode('\\n',$cifrao"."this->$nameComponent[0]['conteudo'])[0])
             );
-            $cifrao"."this->view = '$nameMod';
+            $cifrao"."this->view = '$nameComponent';
         }else{
             $cifrao"."this->seo = array(
                 'title'    => '$c',
-                'keywords' => '$nameMod, contacto, entre em contacto, MVP Gás'
+                'keywords' => '$nameComponent, contacto, entre em contacto, MVP Gás'
             );
         }
         
@@ -49,9 +49,9 @@ class ".$c."
 //caminho onde vai ser criado o arquivo
 $caminhofomodules = $caminho.'includes/modules/';
 //Criando arquivo
-if(file_put_contents($caminhofomodules . $nameMod.'.mod.php',$gridmodulo. $gridmodulo2)){
-    $msg['success'][] = 'Arquivo '.$caminhofomodules .'<b>'. $nameMod.'.mod.php </b>criado com sucesso';
-    chmod($caminhofomodules . $nameMod.'.mod.php', 0777);
+if(file_put_contents($caminhofomodules . $nameComponent.'.mod.php',$gridmodulo. $gridmodulo2)){
+    $msg['success'][] = 'Arquivo '.$caminhofomodules .'<b>'. $nameComponent.'.mod.php </b>criado com sucesso';
+    chmod($caminhofomodules . $nameComponent.'.mod.php', 0777);
 }else{   
-    $msg['error'][] = 'Erro ao criar '.$caminhofomodules .'<b>'. $nameMod.'.mod.php</b>';    
+    $msg['error'][] = 'Erro ao criar '.$caminhofomodules .'<b>'. $nameComponent.'.mod.php</b>';    
 }

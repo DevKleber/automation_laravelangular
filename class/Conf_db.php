@@ -11,6 +11,12 @@ class Conf_db extends DB{
             }
         };
     }
+    //função que pega a primary key
+    public function getInfoTable($table){
+        $stmt = DB::prepare("DESCRIBE $table");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
     //função que pega as colunas de uma tabela    
     public function getColumns($table){
         $stmt = DB::prepare("DESCRIBE $table");

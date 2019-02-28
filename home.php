@@ -34,7 +34,7 @@ $conf_db = new Conf_db();
 
                 <div class="form-group">
                     <label for="exampleForm">Nome do Component</label>
-                    <input type="text" class="form-control inputCheck" onKeyup="montarHtaccess()"  id="nameMod" name="nameMod" >
+                    <input type="text" class="form-control inputCheck" onKeyup="montarHtaccess()"  id="nameComponent" name="nameComponent" >
                 </div>                
                 
              
@@ -48,31 +48,31 @@ $conf_db = new Conf_db();
                     <div class="col-md-12 m-0  hide" id="caminhofe" >
                         <div id="path_fo" class="form-group  mt-15">
                             <label for="exampleForm">Caminho do Angular</label><br />
-                            <input type="text" name="caminho" class="form-control inputCheck" id="caminhoSi"  placeholder="/home/documents/angular/automation/src/app (Caminho raiz do sistema até o APP)" >
+                            <input type="text" name="caminho" class="form-control inputCheck" id="caminhoFrontEnd"  placeholder="/home/documents/angular/automation/src/app (Caminho raiz do sistema até o APP)" >
                         </div>
                     </div>
                     <div class="col-md-6 m-0  hide" id="urlami">
-                        <label class="check">Criar rota api?
-                            <input class="form-check-input" type="checkbox" onclick="CriarUrl()" value="fo" id="checkboxUrlAmigavel" name="checkboxUrlAmigavel" >
+                        <label class="check">Criar rota angular?
+                            <input class="form-check-input" type="checkbox" onclick="CriarUrl()" value="fo" id="caminhoRouteAngular" name="caminhoRouteAngular" >
                             <span class="checkmark"></span>
                         </label>
                     </div>
                     <div class="hide mt-30 ml-50 newBloco"  id="urlAmigavel">
                         <div class="mt-15">
                             <label class="check">Criar rota protegida por token?
-                                <input class="form-check-input" type="checkbox" onclick="CriarUrl()" value="fo" id="checkboxUrlAmigavel" name="checkboxUrlAmigavel" checked="checked">
+                                <input class="form-check-input" type="checkbox" onclick="CriarUrl()" value="fo" id="checkboxRotaApiProtegidaToken" name="checkboxRotaApiProtegidaToken" checked="checked">
                                 <span class="checkmark"></span>
                             </label>
                         </div>
                         <div class="col-md-4 m-0 p-0">
                             <label for="exampleForm">Nome da rota </label><br />
-                            <input type="text" id="urlamigavel" onKeyup="alterarUrlAmigavel()" name="urlamigavel" class="form-control inputCheck"  placeholder="contactos|contacts|contact">
+                            <input type="text" id="namerotaangular" onKeyup="alterarUrlAmigavel()" name="namerotaangular" class="form-control inputCheck"  placeholder="contactos|contacts|contact">
                         </div>
                         
                     </div>
                 </div>
                 <!-- bloco frontend -->
-
+                <hr>
 
                 <!-- bloco backend -->
                 <div class="">
@@ -81,10 +81,43 @@ $conf_db = new Conf_db();
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                <div id="criarbe" class="hide form-group mt-15 ml-20 newBloco">
-                    <div id="path_fo" class="form-group  mt-15">
-                        <label for="exampleForm">Caminho do Laravel</label><br />
-                        <input type="text" name="caminho" class="form-control inputCheck" id="caminhoSi"  placeholder="/var/www/html/financeiro/app (Caminho raiz do sistema até o APP)" >
+                <div class="col-md-6 hide mt-15 ml-40 newBloco" id="div_rotaapi">
+                    <label class="check">Criar rota api?
+                        <input class="form-check-input" type="checkbox" onclick="CriarRotaApi()" value="fo" id="checkboxRotaApi" name="checkboxRotaApi" >
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="ml-60 newBloco" id="div_criar_rota">
+
+                    <div class="col-md-6 hide " id="div_rotabe">
+                        <label for="exampleForm">Nome da rota </label><br />
+                        <input type="text" id="rotabe" onKeyup="alterarUrlAmigavel()" name="rotabe" class="form-control inputCheck"  placeholder="contactos|contacts|contact">
+                    </div>
+
+                    <div id="criarbe" class="hide form-group mt-15 ">
+                        <div class="mt-15">
+                            <label class="check">Criar rota protegida por token?
+                                <input class="form-check-input" type="checkbox" onclick="CriarTokenProtegido()" value="fo" id="checkboxRotaFeProtegidaToken" name="checkboxRotaFeProtegidaToken" checked="checked">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="ml-40 newBloco">
+
+                            <div class="mt-15  hide" id="div_filtrarPorToken">
+                                <label class="check">Trazer registros filtrando por token ex: where id = idtoken?
+                                    <input class="form-check-input" type="checkbox" onclick="findByToken()" value="fo" id="filtrarPorToken" name="filtrarPorToken" checked="checked">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="mt-15 ml-40 newBloco hide " id="div_idtoken">
+                                <label >Qual o campo configurado em jwt.php em 'identifier' => '???' ? </label>
+                                <input class="form-control inputCheck" type="text"  id="nameidtoken" name="nameidtoken" placeholder="id_usuario">
+                            </div>
+                        </div>
+                        <div id="path_fo" class="form-group  mt-15">
+                            <label for="exampleForm">Caminho do Laravel</label><br />
+                            <input type="text" name="caminhoBackEnd" class="form-control inputCheck" id="caminhoBackEnd"  placeholder="/var/www/html/financeiro/app (Caminho raiz do sistema até o APP)" >
+                        </div>
                     </div>
                 </div>
                 <!-- bloco backend -->

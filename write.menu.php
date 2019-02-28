@@ -1,8 +1,8 @@
 <?php
 $addmenu = "    ,array(
         'icon'  => 'icon-cog',
-        'link'  => 'index.php?mod=$nameMod',
-        'label' => '".ucfirst($nameMod)."'
+        'link'  => 'index.php?mod=$nameComponent',
+        'label' => '".ucfirst($nameComponent)."'
     )";
 $file = "menu.php";//Nome da arquivo
 $menu_existente = false;//condição de criacão
@@ -11,7 +11,7 @@ $caminhoMenu = $caminho."admin/includes/views/";//Caminho do arquivo $file
 //Essa função lista todas as linhas do arquivo $file e coloca em um array
 $array_texto = file($caminhoMenu.$file,FILE_IGNORE_NEW_LINES);
 $array_comparacao = ");";//Base de localização dentro do arquivo $file
-$array_mod = "'link'=>'index.php?mod=$nameMod',";//Array de comparação de existência
+$array_mod = "'link'=>'index.php?mod=$nameComponent',";//Array de comparação de existência
 
 //Lista todas as linhas do arquivo $file
 foreach ($array_texto as $line_num => $line) {

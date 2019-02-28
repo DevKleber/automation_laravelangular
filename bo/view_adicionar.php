@@ -1,5 +1,5 @@
 <?php
-$name =str_replace(" ","_",$nameMod);
+$name =str_replace(" ","_",$nameComponent);
 $gridForm = '';
 $gridtop ='';
 $gridDiv ='';
@@ -16,7 +16,7 @@ foreach ($colunas as $key => $c) {
 }
 
 $d = ucfirst($name);
-$c = ucfirst($nameMod);
+$c = ucfirst($nameComponent);
 $aspasSimples = "'";
 $gridtop .= '
 '.$cifrao. $name.' = new '.$d.'();
@@ -90,7 +90,7 @@ $gridDiv .='<?php '.$gridtop.'
 </div> <!-- Wrapper -->
 ';
 //caminho onde vai ser criado o arquivo
-$caminhoboAdicionar = $caminho.'admin/includes/views/'.$nameMod.'/';
+$caminhoboAdicionar = $caminho.'admin/includes/views/'.$nameComponent.'/';
 //Criando arquivo
 if(file_put_contents($caminhoboAdicionar . 'adicionar.php', $gridDiv)){
     $msg['success'][] = 'Arquivo '.$caminhoboAdicionar .'<b>'. 'adicionar.php </b>criado com sucesso';
