@@ -2,10 +2,11 @@
 // Turn off error reporting
 error_reporting(0);
 $conf_db = new Conf_db();
+$helpers = new Helpers();
 
 $table               = $_POST['table'];
 $nameComponent       = $_POST['nameComponent'];
-$nameRota       = $_POST['nameRota'];
+$namerotaangular     = $_POST['namerotaangular'];
 $criar_fo            = $_POST['criar_fo'];
 $caminho             = $_POST['caminho'];
 $checkboxUrlAmigavel = $_POST['checkboxUrlAmigavel'];
@@ -34,11 +35,11 @@ $msg       = [];
 
 
 //Adiciona uma bara no final do caminho caso não existir
-if(substr($caminhoBackEnd,strlen($caminhoBackEnd)-1,1) != '/' ){
-    $caminhoBackEnd .='/';
-}
 
 if(isset($criar_bo)){
+    if(substr($caminhoBackEnd,strlen($caminhoBackEnd)-1,1) != '/' ){
+        $caminhoBackEnd .='/';
+    }
     $caminhoHelpers = $caminhoBackEnd.$caminhoHttp.'Helpers.php';
     //verificar se existe arquivo helpers
 
@@ -67,43 +68,61 @@ if(isset($criar_bo)){
     if( isset($_POST['criar_fo']) || isset($_POST['criar_bo'])){
         new Mensagem($msg);
     }
+}
+// die;
+if(isset($_POST['criar_fo'])){
+    if(substr($caminho,strlen($caminho)-1,1) != '/' ){
+        $caminho .='/';
+    }
 
-    die;
-    if (!file_exists($caminho.'admin/includes/views/'.$nameComponent)) {
-         mkdir($caminho.'admin/includes/views/'.$nameComponent, 0777, true);
-         chmod($caminho.'admin/includes/modules', 0777, true);
-        //Da permissão em pastas/sub-pastas e arquivos dentro de /admin
-        $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($caminho.'admin/includes/views/'));
-        
-        $remove = array("/.");
-        foreach($iterator as $item) {
-            $item = str_replace($remove,'',$item);
-            $last = substr($item, -1);
-            if($last == '.'){
-                $item = substr($item, 0, -1);
+    $caminhoComponent =$caminho.$nameComponent;
+    $nameComponentQuebrar = explode('_',$nameComponent);
+    $nameComponentTrocarUnderlinePorPrimieraMaiuscula = '';
+    if(count($nameComponentQuebrar)>1){
+        $contador=0;
+        foreach ($nameComponentQuebrar as $key => $value) {
+            $contador++;
+            if($contador == 1){
+                $nameComponentTrocarUnderlinePorPrimieraMaiuscula .=$value;
+            }else{
+                $nameComponentTrocarUnderlinePorPrimieraMaiuscula .=ucfirst($value);
             }
-            chmod($item, 0777);
         }
+    }else{
+        $nameComponentTrocarUnderlinePorPrimieraMaiuscula =$nameComponent;
     }
     
-    //chama o arquivo para criar o LARAVEL (BACK-END)
-    require_once("bo/modules.php");
-    require_once("bo/view_adicionar.php");
-    require_once("bo/view_listar.php");   
-}
-die;
-if(isset($_POST['criar_fo'])){
+    
+    require_once("shared/index.php");
+
+    // criar component list table 
+    require_once("frontend/componentHtml.php");
+    // criar component 
+    require_once("frontend/componentTs.php");
+    // criar component inserir 
+    // criar component alterar 
+    // criar component detalhar
+    // die;
+    
+    
+
 
     //chama o arquivo para criar o ANGULAR (FRONT-END)
-    if($_POST['checkboxRotaApi']){
-        require_once("write.htaccess.php");
-        require_once("write.menu.php");
-    }
-    require_once("fo/view.php");
-    require_once("fo/modules.php");
+    // if($_POST['checkboxRotaApi']){
+    //     require_once("write.htaccess.php");
+    //     require_once("write.menu.php");
+    // }
+    // require_once("frontend/view.php");
+    // require_once("frontend/modules.php");
 }   
 
 // Mensagens de erros
 if( isset($_POST['criar_fo']) || isset($_POST['criar_bo'])){
    new Mensagem($msg);
+}
+
+function file_force_contents($filename, $data, $flags = 0){
+    if(!is_dir(dirname($filename)))
+        mkdir(dirname($filename).'/', 0777, TRUE);
+    return file_put_contents($filename, $data,$flags);
 }
