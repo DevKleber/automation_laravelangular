@@ -1,11 +1,17 @@
 <?php 
-$caminhoSharedModule = 'shared/shared.module.ts';
+$caminhoSharedModule                    = 'shared/shared.module.ts';
 $caminhoSharedModuleNotificationService = 'shared/messages/notification.service.ts';
-$caminhoSharedModuleNotificationCss= 'shared/messages/snackbar/snackbar.component.css';
-$caminhoSharedModuleNotificationHtml= 'shared/messages/snackbar/snackbar.component.html';
-$caminhoSharedModuleNotificationTs= 'shared/messages/snackbar/snackbar.component.ts';
-$caminhoSharedModuleNotificationTs= 'shared/messages/snackbar/snackbar.component.ts';
-$caminhoShared = $caminho.$caminhoSharedModule;
+$caminhoSharedModuleNotificationCss     = 'shared/messages/snackbar/snackbar.component.css';
+$caminhoSharedModuleNotificationHtml    = 'shared/messages/snackbar/snackbar.component.html';
+$caminhoSharedModuleNotificationTs      = 'shared/messages/snackbar/snackbar.component.ts';
+$caminhoSharedModuleNotificationTs      = 'shared/messages/snackbar/snackbar.component.ts';
+$caminhoAppModule                       = 'app.module.ts';
+
+$caminhoMessageCss  = 'shared/input/input.component.css';
+$caminhoMessageHtml = 'shared/input/input.component.html';
+$caminhoMessageTs   = 'shared/input/input.component.ts';
+
+$caminhoShared     = $caminho.$caminhoSharedModule;
 
 //verificar se existe arquivo shared
 
@@ -30,4 +36,16 @@ if (!file_exists($caminho.$caminhoSharedModuleNotificationHtml)) {
 if (!file_exists($caminho.$caminhoSharedModuleNotificationTs)) {
     //vamos criar tudo aqui. 
     require_once("./shared/messages/snackbar/snackbarcomponentts.php");
+}
+require_once("./appmodule.php");
+require_once("./appmodule.php");
+
+if (!file_exists($caminho.$caminhoMessageCss)) {
+    require_once("./shared/input/inputcomponentcss.php");
+}
+if (!file_exists($caminho.$caminhoMessageHtml)) {
+    require_once("./shared/input/inputcomponenthtml.php");
+}
+if (!file_exists($caminho.$caminhoMessageTs)) {
+    require_once("./shared/input/inputcomponentts.php");
 }

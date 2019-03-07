@@ -94,11 +94,11 @@ if(isset($_POST['criar_fo'])){
     
     
     require_once("shared/index.php");
-
-    // criar component list table 
     require_once("frontend/componentHtml.php");
-    // criar component 
     require_once("frontend/componentTs.php");
+    require_once("frontend/componentCss.php");
+    require_once("frontend/componentService.php");
+    require_once("frontend/componentModel.php");
     // criar component inserir 
     // criar component alterar 
     // criar component detalhar
