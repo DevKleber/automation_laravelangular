@@ -33,6 +33,8 @@ $colunas   = $conf_db->getColumns($table);
 $infoTable = $conf_db->getInfoTable($table);
 $msg       = [];
 
+$event = '$event';
+
 
 //Adiciona uma bara no final do caminho caso não existir
 
@@ -99,21 +101,17 @@ if(isset($_POST['criar_fo'])){
     require_once("frontend/componentCss.php");
     require_once("frontend/componentService.php");
     require_once("frontend/componentModel.php");
+    require_once("frontend/componentModule.php");
     // criar component inserir 
+    require_once("frontend/incluir/index_incluir.php");
+    
     // criar component alterar 
+    // require_once("frontend/incluir/index_incluir.php");
     // criar component detalhar
+    // require_once("frontend/incluir/index_incluir.php");
     // die;
     
     
-
-
-    //chama o arquivo para criar o ANGULAR (FRONT-END)
-    // if($_POST['checkboxRotaApi']){
-    //     require_once("write.htaccess.php");
-    //     require_once("write.menu.php");
-    // }
-    // require_once("frontend/view.php");
-    // require_once("frontend/modules.php");
 }   
 
 // Mensagens de erros
