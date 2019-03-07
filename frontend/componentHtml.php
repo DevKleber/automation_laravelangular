@@ -7,9 +7,9 @@ $c = ucfirst($nameComponent);
 $option = '';
 $td = '';
 
-$nameGetServices .=$nameComponentTrocarUnderlinePorPrimieraMaiuscula;
+$nameGetServices =$nameComponentTrocarUnderlinePorPrimieraMaiuscula;
 if($helpers->checkLastChar($nameComponentTrocarUnderlinePorPrimieraMaiuscula) != 's'){
-    $nameGetServices .=$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'s';
+    $nameGetServices =$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'s';
 }
 $nameToLateNgFor = $helpers->removerUltimoCaracter($nameGetServices);
 foreach ($colunasHtml as $key => $value) {

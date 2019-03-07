@@ -9,7 +9,7 @@ $td = '';
 
 $nameGetServices =$nameComponentTrocarUnderlinePorPrimieraMaiuscula;
 if($helpers->checkLastChar($nameComponentTrocarUnderlinePorPrimieraMaiuscula) != 's'){
-    $nameGetServices .=$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'s';
+    $nameGetServices =$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'s';
 }
 $nameRemoverUltimo = $helpers->removerUltimoCaracter($nameGetServices);
 foreach ($colunasHtml as $key => $value) {

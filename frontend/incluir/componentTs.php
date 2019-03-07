@@ -1,22 +1,129 @@
 <?php
-$colunasHtml = $colunas;
-unset($colunasHtml['id']);
-$fillable = "'".implode("','",$colunasHtml)."'";
-
-$c = ucfirst($componentName);
-$option = '';
-$td = '';
 
 $nameGetServices =$nameComponentTrocarUnderlinePorPrimieraMaiuscula;
 if($helpers->checkLastChar($nameComponentTrocarUnderlinePorPrimieraMaiuscula) != 's'){
-    $nameGetServices .=$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'s';
+    $nameGetServices =$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'s';
 }
 $nameRemoverUltimo = $helpers->removerUltimoCaracter($nameGetServices);
-foreach ($colunasHtml as $key => $value) {
-}
+
 $nameRecebeService = lcfirst($nameGetServices);
-$nameGetServices = ucfirst($nameGetServices);
-$componentName = ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Component';
+$nameGetServices   = ucfirst($nameGetServices);
+$componentName     = ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Component';
+
+$variaveis = '';
+$save .='save(form) {
+    this.'.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service.save(form)
+  }';
+if($uparImage){
+  $variaveis .="img: any = 'assets/img/user/padrao.jpg';
+  selectedFile: File;";
+  
+  $save      = "save(form) {
+    this.uploadFile(form)
+  }
+
+  uploadFile(form) {
+    const uploadData = new FormData();
+    if (this.selectedFile) {
+      this.loader = true;
+      uploadData.append('fileimg', this.selectedFile, this.selectedFile.name);
+      this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).".save(uploadData)
+        .subscribe(data => {
+          form.fileimg = data.file
+
+          this.loader = false;
+          this.saveForm(form)
+        },
+        response => {
+          this.loader = false;
+            if (response.status === 401) {
+              this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).".notify(\"não foi possivel salvar\");
+            } if (response.status === 0) {
+              this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).".notify(\"SERVIDOR OFFILINE\");
+            }
+
+          },
+          () => {
+          })
+    } else {
+      this.saveForm(form)
+    }
+  }
+
+  saveForm(form) {
+    this.loader = true;
+    this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).".save(form)
+      .subscribe(data => {
+        this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).".notify(data.response);
+        this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).".goTo()
+        this.loader = false;
+      },
+      
+      response => {true
+        this.loader = false;
+          if (response.status === 401) {
+            this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).".notify(\"não foi possivel salvar\");
+          } if (response.status === 0) {
+            this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).".notify(\"SERVIDOR OFFILINE\");
+          }
+
+        },
+        () => {
+        })
+  }
+  name(nome) {
+    return Date.now() + nome
+  }
+  getExtension(name) {
+    return name.split('.').pop();
+  }
+  onFileChanged(event) {
+    var tmppath = URL.createObjectURL(event.target.files[0]);
+    switch (this.getExtension(event.target.files[0].name)) {
+      case 'pdf': {
+        this.img = 'assets/img/file/pdf.svg'
+        break;
+      }
+      case 'txt': {
+        this.img = 'assets/img/file/txt.svg'
+        break;
+      }
+      case 'pptx': case 'ppt': case 'pps': {
+        this.img = 'assets/img/file/ppt.svg'
+        break;
+      }
+      case 'xls': case 'xlsx': {
+        this.img = 'assets/img/file/xls.svg'
+        break;
+      }
+      case \"doc\": case \"docx\": case \"dotx\": case \"dot\": {
+        this.img = 'assets/img/file/docs.svg'
+        break;
+      }
+      default: {
+        this.img = tmppath;
+        break;
+      }
+    }
+    this.selectedFile = event.target.files[0];
+
+  }";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 $component = '
 import { Component, OnInit } from \'@angular/core\';
 import { FormBuilder, FormControl, FormGroup } from \'@angular/forms\';
@@ -27,64 +134,41 @@ import { '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service }
 import { Observable } from \'rxjs\';
 
 @Component({
-  selector: \'app-'.lcfirst($nameComponent).'\',
-  templateUrl: \'./'.lcfirst($nameComponent).'.component.html\',
-  styleUrls: [\'./'.lcfirst($nameComponent).'.component.css\']
+  selector: \'app-incluir\',
+  templateUrl: \'./incluir.component.html\',
+  styleUrls: [\'./incluir.component.css\']
 })
 export class '.$componentName.' implements OnInit {
-  '.$nameRecebeService.': '.ucfirst($componentName).'[];
-  searchForm: FormGroup
-  searchControl: FormControl
+  '.$nameRecebeService.': '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).';
   loader: boolean = true;
-  page: number = 1;
-  itensPorPagina = 10;
+  '.$variaveis.'
 
   constructor(private '.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service: '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service, private fb: FormBuilder, private notificationService: NotificationService) { }
 
   ngOnInit() {
-    this.searchControl = this.fb.control(\'\')
-    this.searchForm = this.fb.group({
-      searchControl: this.searchControl
-    })
-
-    this.get'.$nameGetServices.'();
-
+    this.initializeFormEmpty();
   }
-
-  get'.$nameGetServices.'() {
-    this.'.lcfirst($nameGetServices).'Service.get'.$nameGetServices.'().subscribe('.$nameRemoverUltimo.' => {
-      this.'.$nameRecebeService.' = '.$nameRemoverUltimo.'[\'dados\']
-      this.loader = false
-    });
-  }
-
-  InativarDepoimento('.$nameRemoverUltimo.') {
-
-    if (confirm(\'Você tem certeza que deseja remover o (a)  '.$componentName.' \')) {
-      this.loader = true
-      this.'.lcfirst($nameGetServices).'Service.inativar('.$nameRemoverUltimo.'.id).subscribe((data) => {
-        if (data[\'dados\']) {
-          '.$nameRemoverUltimo.'.bo_ativo = false;
-          // this.'.$nameRecebeService.'.splice(this.'.$nameRecebeService.'.indexOf('.$nameRemoverUltimo.'),1)
-          this.notificationService.notify(`'.$nameRemoverUltimo.' inativado`)
-        }
-        this.loader = false
-      });
-    }
-
-  }
-
   
-  update(form) {
-    this.'.lcfirst($nameGetServices).'Service.update(form, form.id)
+  initializeFormEmpty() {
+    this.form = this.formBuilder.group({
+      title: this.formBuilder.control(\'\', [Validators.required]),
+      subtitle: this.formBuilder.control(\'\', [Validators.required]),
+      link: this.formBuilder.control(\'\', [Validators.required]),
+      sort_order: this.formBuilder.control(\'\'),
+      tipo: this.formBuilder.control(\'\'),
+      fileimg: this.formBuilder.control(\'\')
+
+    })
   }
+  '.$save.'
+  
 }
 
 ';
 
 
 //caminho onde vai ser criado o arquivo
-$caminhoTs = $caminhoComponent.'/'.$nameComponent.'.component.ts';
+$caminhoTs = $caminhoComponent.'/incluir/incluir.componenet.ts';
 
 if (file_force_contents($caminhoTs,$component)){
     $msg['success'][] = 'Arquivo '.$caminhoTs.'</b> criado com sucesso';    
