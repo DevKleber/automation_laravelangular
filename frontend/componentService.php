@@ -21,7 +21,7 @@ $insert = "save(form): Observable<any> {
   }
 ";
 $update = "update(form,id) {
-    return this.http.put(`\${API}/".$namerotaangular."/\${id}\`, form)
+    return this.http.put(`\${API}/".$namerotaangular."/\${id}`, form)
     .subscribe((data) => {
       if (data['dados']) {
         this.notify('Registro Alterado Com Sucesso!');
@@ -58,7 +58,7 @@ if($uparImage){
   }";
 
   $update = "update(form,id) {
-    return this.http.put(`\${API}/".$namerotaangular."/\${id}\`, form)
+    return this.http.put(`\${API}/".$namerotaangular."/\${id}`, form)
     .pipe(
       tap(user => {
   
@@ -101,7 +101,7 @@ export class DepoimentoService {
   }
 
 
-  depoimentoById(id: string): Observable<".ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."> {
+  get".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."ById(id: string): Observable<".ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."> {
     return this.http.get<".ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).">(`\${API}/".$namerotaangular."/\${id}`)
 
   }

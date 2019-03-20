@@ -4,7 +4,7 @@
 $componentModule = "import { NgModule } from '@angular/core'
 import { SharedModule } from '../shared/shared.module'
 import { RouterModule, Routes } from '@angular/router'
-import { $componentName } from './produto.component';
+import { $componentName } from './$nameComponent.component';
 
 const ROUTES: Routes = [
   { path: '', component: $componentName }

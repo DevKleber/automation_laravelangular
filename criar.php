@@ -95,6 +95,10 @@ if(isset($_POST['criar_fo'])){
     }
     
     
+    // require_once("app/api.php");
+    // require_once("app/errorhandler.php");
+    // require_once("app/routes.php");
+
     require_once("shared/index.php");
     require_once("frontend/componentHtml.php");
     require_once("frontend/componentTs.php");
@@ -106,7 +110,7 @@ if(isset($_POST['criar_fo'])){
     require_once("frontend/incluir/index_incluir.php");
     
     // criar component alterar 
-    // require_once("frontend/incluir/index_incluir.php");
+    require_once("frontend/alterar/index_alterar.php");
     // criar component detalhar
     // require_once("frontend/incluir/index_incluir.php");
     // die;

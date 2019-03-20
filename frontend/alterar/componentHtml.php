@@ -51,7 +51,7 @@ $html = "
 
 
 //caminho onde vai ser criado o arquivo
-$caminhoInsertHtml = $caminhoComponent.'/incluir/incluir.component.html';
+$caminhoInsertHtml = $caminhoComponent.'/alterar/alterar.component.html';
 if (file_force_contents($caminhoInsertHtml,$html)){
     $msg['success'][] = 'Arquivo '.$caminhoInsertHtml.'</b> criado com sucesso';    
     chmod($caminhoComponent,0777);

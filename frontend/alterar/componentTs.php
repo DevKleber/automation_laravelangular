@@ -117,50 +117,69 @@ if($uparImage){
 
 
 
+
+
+
 $formInit = [];
+$formInitEmpty = [];
 foreach ($colunas as $key => $value) {
   $buscaImage = explode("img",$value);
   if(count($buscaImage)>1){
+    $formInitEmpty[] ="fileimg: this.formBuilder.control('')";
     $formInit[] ="fileimg: this.formBuilder.control('')";
   }else{
-	$formInit[] ="$value: this.formBuilder.control('', [Validators.required])";
+	$formInitEmpty[] ="$value: this.formBuilder.control('', [Validators.required])";
+	$formInit[] ="$value: this.formBuilder.control(".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).".$value, [Validators.required])";
   }
 }
-
-
 
 
 
 $component = '
 import { Component, OnInit } from \'@angular/core\';
 import { FormBuilder, FormControl, FormGroup,Validators } from \'@angular/forms\';
-
+import { ActivatedRoute } from \'@angular/router\';
 import { NotificationService } from \'../shared/messages/notification.service\';
 import { '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).' } from \'./'.$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'.model\'
 import { '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service } from \'./'.$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'.service\';
-
+import { API_PATH_IMG } from \'./../../app.api\';
 import { Observable } from \'rxjs\';
 
 @Component({
-  selector: \'app-incluir\',
-  templateUrl: \'./incluir.component.html\',
-  styleUrls: [\'./incluir.component.css\']
+  selector: \'app-alterar\',
+  templateUrl: \'./alterar.component.html\',
+  styleUrls: [\'./alterar.component.css\']
 })
 export class '.$componentName.' implements OnInit {
-  '.$nameRecebeService.': '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).';
+  '.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).': '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).';
   loader: boolean = true;
   form: FormGroup;
   '.$variaveis.'
 
-  constructor(private '.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service: '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service, private formBuilder: FormBuilder, private notificationService: NotificationService) { }
+  constructor(private '.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service: '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service, private formBuilder: FormBuilder, private notificationService: NotificationService, private router: ActivatedRoute) { }
 
   ngOnInit() {
     this.initializeFormEmpty();
+    this.getProduto();
   }
-  
-  initializeFormEmpty() {
+  getProduto() {
+    this.'.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service.get'.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'ById(this.router.snapshot.params[\'id\']).subscribe('.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).' => {
+      this.'.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).' = '.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'
+      if('.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'.img){
+        this.img = `${API_PATH_IMG}/'.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'/${'.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'.img}`
+      }
+      this.initializeForm(this.'.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).')
+      this.loader = false
+    });
+  }
+  initializeForm('.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).') {
     this.form = this.formBuilder.group({
       '.implode(",\n      ",$formInit).'
+    })
+  }
+  initializeFormEmpty() {
+    this.form = this.formBuilder.group({
+      '.implode(",\n      ",$formInitEmpty).'
     })
   }
   '.$save.'
@@ -171,7 +190,7 @@ export class '.$componentName.' implements OnInit {
 
 
 //caminho onde vai ser criado o arquivo
-$caminhoTs = $caminhoComponent.'/incluir/incluir.componenet.ts';
+$caminhoTs = $caminhoComponent.'/alterar/alterar.componenet.ts';
 
 if (file_force_contents($caminhoTs,$component)){
     $msg['success'][] = 'Arquivo '.$caminhoTs.'</b> criado com sucesso';    

@@ -38,7 +38,7 @@ if (!file_exists($caminho.$caminhoSharedModuleNotificationTs)) {
     require_once("./shared/messages/snackbar/snackbarcomponentts.php");
 }
 require_once("./appmodule.php");
-require_once("./appmodule.php");
+// require_once("./appmodule.php");
 
 if (!file_exists($caminho.$caminhoMessageCss)) {
     require_once("./shared/input/inputcomponentcss.php");
