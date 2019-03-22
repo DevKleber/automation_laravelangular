@@ -6,7 +6,7 @@ foreach ($colunas as $key => $value) {
       $uparImage = true;
   }
 }
-$insert = "save(form): Observable<any> {
+$insert = "save(form) {
     return this.http.post<any>(`\${API}/".$namerotaangular."`, form)
     .subscribe((data) => {
         if (data['dados']) {
@@ -18,7 +18,6 @@ $insert = "save(form): Observable<any> {
         this.notify(`Error: \${error}`);
       });
     }
-  }
 ";
 $update = "update(form,id) {
     return this.http.put(`\${API}/".$namerotaangular."/\${id}`, form)
@@ -33,22 +32,14 @@ $update = "update(form,id) {
     });
   }";
 
-$inativar = "inativar(id: string) {
+  $inativar = "inativar(id: string) {
     return this.http.delete(`\${API}/".$namerotaangular."/\${id}`)
-    .subscribe((data) => {
-      if (data['dados']) {
-        this.notify('Registro Inativado Com Sucesso!');
-        this.router.navigate(['/".$namerotaangular."'])
-      }
-      console.log(data);
-    }, (error) => {
-      this.notify(`Error: \${error}`);
-    });
+
   }";
 
 if($uparImage){
   
-  $insert = "save(form): Observable<any> {
+  $insert = "save(form) {
     return this.http.post<any>(`\${API}/".$namerotaangular."`, form)
     .pipe(
       tap(user => {
@@ -77,7 +68,7 @@ import { tap, filter } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 import { Router, NavigationEnd } from '@angular/router'
 
-import { ".ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)." } from './".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).".model'
+import { $nomeComponent } from './".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).".model'
 
 
 import { NotificationService } from '../shared/messages/notification.service';
@@ -87,7 +78,7 @@ import { API } from '../app.api'
   providedIn: 'root'
 })
 
-export class DepoimentoService {
+export class ".$nomeComponent."Service {
 
   constructor(
     private http: HttpClient,
@@ -95,14 +86,14 @@ export class DepoimentoService {
     private router: Router
   ) { }
 
-  get".$nameGetServices."(search?: string): Observable<".ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."[]> {
+  get".$nameGetServices."(search?: string): Observable<".ucfirst($nomeComponent)."[]> {
 
-    return this.http.get<".ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."[]>(`\${API}/".$namerotaangular."`)
+    return this.http.get<".ucfirst($nomeComponent)."[]>(`\${API}/".$namerotaangular."`)
   }
 
 
-  get".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."ById(id: string): Observable<".ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."> {
-    return this.http.get<".ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).">(`\${API}/".$namerotaangular."/\${id}`)
+  get".lcfirst($nomeComponent)."ById(id: string): Observable<".ucfirst($nomeComponent)."> {
+    return this.http.get<".ucfirst($nomeComponent).">(`\${API}/".$namerotaangular."/\${id}`)
 
   }
 

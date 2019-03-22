@@ -7,22 +7,19 @@ $c = ucfirst($componentName);
 $option = '';
 $td = '';
 
-$nameGetServices =$nameComponentTrocarUnderlinePorPrimieraMaiuscula;
-if($helpers->checkLastChar($nameComponentTrocarUnderlinePorPrimieraMaiuscula) != 's'){
-    $nameGetServices =$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'s';
-}
+
 $nameRemoverUltimo = $helpers->removerUltimoCaracter($nameGetServices);
 foreach ($colunasHtml as $key => $value) {
 }
 $nameRecebeService = lcfirst($nameGetServices);
-$nameGetServices = ucfirst($nameGetServices);
+
 $componentName = ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Component';
 $component = '
 import { Component, OnInit } from \'@angular/core\';
 import { FormBuilder, FormControl, FormGroup } from \'@angular/forms\';
 import { NotificationService } from \'../shared/messages/notification.service\';
-import { '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).' } from \'./'.$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'.model\'
-import { '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service } from \'./'.$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'.service\';
+import { '.ucfirst($nomeComponent).' } from \'./'.$nameComponent.'.model\'
+import { '.ucfirst($nomeComponent).'Service } from \'./'.$nameComponent.'.service\';
 
 import { Observable } from \'rxjs\';
 
@@ -31,15 +28,15 @@ import { Observable } from \'rxjs\';
   templateUrl: \'./'.lcfirst($nameComponent).'.component.html\',
   styleUrls: [\'./'.lcfirst($nameComponent).'.component.css\']
 })
-export class '.$componentName.' implements OnInit {
-  '.$nameRecebeService.': '.ucfirst($componentName).'[];
+export class '.$nomeComponent.'Component implements OnInit {
+  '.$nameRecebeService.': '.ucfirst($nomeComponent).'[];
   searchForm: FormGroup
   searchControl: FormControl
   loader: boolean = true;
   page: number = 1;
   itensPorPagina = 10;
 
-  constructor(private '.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service: '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service, private fb: FormBuilder, private notificationService: NotificationService) { }
+  constructor(private '.lcfirst($nomeComponent).'Service: '.ucfirst($nomeComponent).'Service, private fb: FormBuilder, private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.searchControl = this.fb.control(\'\')
@@ -52,7 +49,7 @@ export class '.$componentName.' implements OnInit {
   }
 
   get'.$nameGetServices.'() {
-    this.'.lcfirst($nameGetServices).'Service.get'.$nameGetServices.'().subscribe('.$nameRemoverUltimo.' => {
+    this.'.lcfirst($nomeComponent).'Service.get'.$nameGetServices.'().subscribe('.$nameRemoverUltimo.' => {
       this.'.$nameRecebeService.' = '.$nameRemoverUltimo.'[\'dados\']
       this.loader = false
     });
@@ -62,7 +59,7 @@ export class '.$componentName.' implements OnInit {
 
     if (confirm(\'Você tem certeza que deseja remover o (a)  '.$componentName.' \')) {
       this.loader = true
-      this.'.lcfirst($nameGetServices).'Service.inativar('.$nameRemoverUltimo.'.id).subscribe((data) => {
+      this.'.lcfirst($nomeComponent).'Service.inativar('.$nameRemoverUltimo.'.id).subscribe((data) => {
         if (data[\'dados\']) {
           '.$nameRemoverUltimo.'.bo_ativo = false;
           // this.'.$nameRecebeService.'.splice(this.'.$nameRecebeService.'.indexOf('.$nameRemoverUltimo.'),1)
@@ -76,7 +73,7 @@ export class '.$componentName.' implements OnInit {
 
   
   update(form) {
-    this.'.lcfirst($nameGetServices).'Service.update(form, form.id)
+    this.'.lcfirst($nomeComponent).'Service.update(form, form.id)
   }
 }
 

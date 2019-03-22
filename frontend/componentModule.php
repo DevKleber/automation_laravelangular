@@ -4,21 +4,21 @@
 $componentModule = "import { NgModule } from '@angular/core'
 import { SharedModule } from '../shared/shared.module'
 import { RouterModule, Routes } from '@angular/router'
-import { $componentName } from './$nameComponent.component';
+import { ".$nomeComponent."Component } from './$nameComponent.component';
 
 const ROUTES: Routes = [
-  { path: '', component: $componentName }
+  { path: '', component: ".$nomeComponent."Component }
 ];
 @NgModule({
   declarations: [
-    $componentName,
+    ".$nomeComponent."Component,
   ],
   imports: [
     SharedModule,
     RouterModule.forChild(ROUTES)
   ]
 })
-export class ".ucfirst($nameGetServices)."Module { }";
+export class ".ucfirst($nomeComponent)."Module { }";
 
 $caminhoModule = $caminhoComponent.'/'.$nameComponent.'.module.ts';
 if (file_force_contents($caminhoModule,$componentModule)){

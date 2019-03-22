@@ -1,9 +1,9 @@
 <?php
 
-$nameGetServices =$nameComponentTrocarUnderlinePorPrimieraMaiuscula;
-if($helpers->checkLastChar($nameComponentTrocarUnderlinePorPrimieraMaiuscula) != 's'){
-    $nameGetServices =$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'s';
-}
+// $nameGetServices =$nameComponentTrocarUnderlinePorPrimieraMaiuscula;
+// if($helpers->checkLastChar($nameComponentTrocarUnderlinePorPrimieraMaiuscula) != 's'){
+//     $nameGetServices =$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'s';
+// }
 $nameRemoverUltimo = $helpers->removerUltimoCaracter($nameGetServices);
 
 $nameRecebeService = lcfirst($nameGetServices);
@@ -135,9 +135,9 @@ $component = '
 import { Component, OnInit } from \'@angular/core\';
 import { FormBuilder, FormControl, FormGroup,Validators } from \'@angular/forms\';
 
-import { NotificationService } from \'../shared/messages/notification.service\';
-import { '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).' } from \'./'.$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'.model\'
-import { '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service } from \'./'.$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'.service\';
+import { NotificationService } from \'../../shared/messages/notification.service\';
+import { '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).' } from \'./../'.$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'.model\'
+import { '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service } from \'./../'.$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'.service\';
 
 import { Observable } from \'rxjs\';
 
@@ -146,7 +146,7 @@ import { Observable } from \'rxjs\';
   templateUrl: \'./incluir.component.html\',
   styleUrls: [\'./incluir.component.css\']
 })
-export class '.$componentName.' implements OnInit {
+export class IncluirComponent implements OnInit {
   '.$nameRecebeService.': '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).';
   loader: boolean = true;
   form: FormGroup;
@@ -171,7 +171,7 @@ export class '.$componentName.' implements OnInit {
 
 
 //caminho onde vai ser criado o arquivo
-$caminhoTs = $caminhoComponent.'/incluir/incluir.componenet.ts';
+$caminhoTs = $caminhoComponent.'/incluir/incluir.component.ts';
 
 if (file_force_contents($caminhoTs,$component)){
     $msg['success'][] = 'Arquivo '.$caminhoTs.'</b> criado com sucesso';    

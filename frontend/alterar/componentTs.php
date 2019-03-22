@@ -1,20 +1,24 @@
 <?php
 
-$nameGetServices =$nameComponentTrocarUnderlinePorPrimieraMaiuscula;
-if($helpers->checkLastChar($nameComponentTrocarUnderlinePorPrimieraMaiuscula) != 's'){
-    $nameGetServices =$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'s';
-}
+// $nameGetServices =$nameComponentTrocarUnderlinePorPrimieraMaiuscula;
+// if($helpers->checkLastChar($nameComponentTrocarUnderlinePorPrimieraMaiuscula) != 's'){
+//     $nameGetServices =$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'s';
+// }
 $nameRemoverUltimo = $helpers->removerUltimoCaracter($nameGetServices);
 
 $nameRecebeService = lcfirst($nameGetServices);
-$nameGetServices   = ucfirst($nameGetServices);
+// $nameGetServices   = ucfirst($nameGetServices);
 $componentName     = ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Component';
 
 $variaveis = '';
-$save .='save(form) {
+$ifgetImg = "";
+$save ='save(form) {
     this.'.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service.save(form)
   }';
 if($uparImage){
+  $ifgetImg = "if('.lcfirst($nomeComponent).'.img){
+    this.img = `${API_PATH_IMG}/'.lcfirst($nomeComponent).'/${'.lcfirst($nomeComponent).'.img}`
+  }";
   $variaveis .="img: any = 'assets/img/user/padrao.jpg';
   selectedFile: File;";
   
@@ -139,9 +143,9 @@ $component = '
 import { Component, OnInit } from \'@angular/core\';
 import { FormBuilder, FormControl, FormGroup,Validators } from \'@angular/forms\';
 import { ActivatedRoute } from \'@angular/router\';
-import { NotificationService } from \'../shared/messages/notification.service\';
-import { '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).' } from \'./'.$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'.model\'
-import { '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service } from \'./'.$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'.service\';
+import { NotificationService } from \'../../shared/messages/notification.service\';
+import { '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).' } from \'./../'.$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'.model\'
+import { '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service } from \'./../'.$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'.service\';
 import { API_PATH_IMG } from \'./../../app.api\';
 import { Observable } from \'rxjs\';
 
@@ -150,29 +154,27 @@ import { Observable } from \'rxjs\';
   templateUrl: \'./alterar.component.html\',
   styleUrls: [\'./alterar.component.css\']
 })
-export class '.$componentName.' implements OnInit {
-  '.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).': '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).';
+export class AlterarComponent implements OnInit {
+  '.lcfirst($nomeComponent).': '.ucfirst($nomeComponent).';
   loader: boolean = true;
   form: FormGroup;
   '.$variaveis.'
 
-  constructor(private '.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service: '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service, private formBuilder: FormBuilder, private notificationService: NotificationService, private router: ActivatedRoute) { }
+  constructor(private '.lcfirst($nomeComponent).'Service: '.ucfirst($nomeComponent).'Service, private formBuilder: FormBuilder, private notificationService: NotificationService, private router: ActivatedRoute) { }
 
   ngOnInit() {
     this.initializeFormEmpty();
-    this.getProduto();
+    this.get'.$nomeComponent.'();
   }
-  getProduto() {
-    this.'.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service.get'.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'ById(this.router.snapshot.params[\'id\']).subscribe('.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).' => {
-      this.'.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).' = '.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'
-      if('.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'.img){
-        this.img = `${API_PATH_IMG}/'.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'/${'.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'.img}`
-      }
-      this.initializeForm(this.'.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).')
+  get'.$nomeComponent.'() {
+    this.'.lcfirst($nomeComponent).'Service.get'.lcfirst($nomeComponent).'ById(this.router.snapshot.params[\'id\']).subscribe('.lcfirst($nomeComponent).' => {
+      this.'.lcfirst($nomeComponent).' = '.lcfirst($nomeComponent).'
+      '.$ifgetImg.'
+      this.initializeForm(this.'.lcfirst($nomeComponent).')
       this.loader = false
     });
   }
-  initializeForm('.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).') {
+  initializeForm('.lcfirst($nomeComponent).') {
     this.form = this.formBuilder.group({
       '.implode(",\n      ",$formInit).'
     })
@@ -190,7 +192,7 @@ export class '.$componentName.' implements OnInit {
 
 
 //caminho onde vai ser criado o arquivo
-$caminhoTs = $caminhoComponent.'/alterar/alterar.componenet.ts';
+$caminhoTs = $caminhoComponent.'/alterar/alterar.component.ts';
 
 if (file_force_contents($caminhoTs,$component)){
     $msg['success'][] = 'Arquivo '.$caminhoTs.'</b> criado com sucesso';    

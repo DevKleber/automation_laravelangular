@@ -4,13 +4,15 @@ error_reporting(0);
 $conf_db = new Conf_db();
 $helpers = new Helpers();
 
-$table               = $_POST['table'];
-$nameComponent       = $_POST['nameComponent'];
-$namerotaangular     = $_POST['namerotaangular'];
-$criar_fo            = $_POST['criar_fo'];
-$caminho             = $_POST['caminho'];
-$checkboxUrlAmigavel = $_POST['checkboxUrlAmigavel'];
-$urlamigavel         = $_POST['urlamigavel'];
+$table                          = $_POST['table'];
+$nameComponent                  = $_POST['nameComponent'];
+$nomeComponent                  = $helpers->nomeComponent($nameComponent);
+$namerotaangular                = $_POST['namerotaangular'];
+$criar_fo                       = $_POST['criar_fo'];
+$caminho                        = $_POST['caminho'];
+$checkboxUrlAmigavel            = $_POST['checkboxUrlAmigavel'];
+$urlamigavel                    = $_POST['urlamigavel'];
+$checkboxRotaApiProtegidaToken  = $_POST['checkboxRotaApiProtegidaToken'];
 
 //backend
 $checkboxRotaApi              = $_POST['checkboxRotaApi'];
@@ -23,9 +25,18 @@ $nameidtoken                  = $_POST['nameidtoken'];
 
 $caminhoHttp = 'Http/';
 
+//configs front e back
+$nameGetServices =$nomeComponent;
+if($helpers->checkLastChar($nomeComponent) != 's'){
+    $nameGetServices =$nomeComponent.'s';
+}
+
 
 $caminhoRaizBanckend = str_replace("/app\/",'',$caminhoBackEnd);
 $caminhoRaizBanckend = str_replace("/app",'',$caminhoBackEnd);
+
+$caminhoRaizFrontEnd = str_replace("/app\/",'',$caminho);
+$caminhoRaizFrontEnd = str_replace("/app",'',$caminho);
 $htaccess      = $_POST['confihtacces'];
 
 $pk        = $conf_db->getPk($table);
@@ -94,10 +105,9 @@ if(isset($_POST['criar_fo'])){
         $nameComponentTrocarUnderlinePorPrimieraMaiuscula =$nameComponent;
     }
     
-    
-    // require_once("app/api.php");
-    // require_once("app/errorhandler.php");
-    // require_once("app/routes.php");
+    require_once("frontend/app/api.php");
+    require_once("frontend/app/errorhandler.php");
+    require_once("frontend/app/routes.php");
 
     require_once("shared/index.php");
     require_once("frontend/componentHtml.php");
