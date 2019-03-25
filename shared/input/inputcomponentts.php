@@ -39,9 +39,9 @@ export class InputComponent implements OnInit, AfterContentInit {
 
 
 if (file_force_contents($caminho.$caminhoMessageTs,$inputTs)){
-    $msg['success'][] = 'Arquivo '.$caminho.$caminhoMessageTs.'</b> criado com sucesso';    
-    chmod($caminho.'shared/input',0777);
-    chmod($caminho.$caminhoMessageTs,0777);
-}else{
-    $msg['error'][] = 'Erro ao criar '.$caminho.$caminhoMessageTs;
+    $msg['success'][$pastaShared]['input'][] = 'input.component.ts';    
+    @chmod($caminho.'shared/input',0777);
+    @chmod($caminho.$caminhoMessageTs,0777);
+  }else{
+    $msg['success'][$pastaShared]['input'][] = 'ERROR|input.component.ts'; 
 }

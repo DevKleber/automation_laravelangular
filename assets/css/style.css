@@ -41,3 +41,20 @@ body{
 
 .f-left{float: left;}
 .clear { clear: both; }
+.imgNivel0{margin-left:0px}
+.imgNivel1{margin-left:10px!important}
+.imgNivel2{margin-left:20px!important}
+.imgNivel3{margin-left:30px!important}
+.imgNivel4{margin-left:35px!important}
+.imgNivel6{margin-left:60px!important}
+.imgNivel8{margin-left:80px!important}
+.imgNivel10{margin-left:100px!important}
+
+.frontend,.backend{
+    padding: 1cm;
+    border: 1px #D3D3D3 solid;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.false{color: red;text-decoration: line-through;}

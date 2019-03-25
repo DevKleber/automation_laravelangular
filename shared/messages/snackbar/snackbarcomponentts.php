@@ -57,9 +57,9 @@ export class SnackbarComponent implements OnInit {
 
 
 if (file_force_contents($caminho.$caminhoSharedModuleNotificationTs,$notificationTs)){
-    $msg['success'][] = 'Arquivo '.$caminho.$caminhoSharedModuleNotificationTs.'</b> criado com sucesso';    
-    chmod($caminho.'shared',0777);
-    chmod($caminho.$caminhoSharedModuleNotificationTs,0777);
-}else{
-    $msg['error'][] = 'Erro ao criar '.$caminho.$caminhoSharedModuleNotificationTs;
+    $msg['success'][$pastaShared]['messages']['snackbar'][] = 'snackbar.component.html';    
+    @chmod($caminho.'shared',0777);
+    @chmod($caminho.$caminhoSharedModuleNotificationTs,0777);
+  }else{
+    $msg['success'][$pastaShared]['messages']['snackbar'][] = 'ERROR|snackbar.component.html';    
 }

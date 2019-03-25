@@ -42,9 +42,9 @@ if($rota_existente){
         $array_texto[$posicaoAddUrl] =$textoOriginal."\n".$rotanew;
     }
     //Adicionando nova regra no local correto
-    if(file_put_contents($caminhoRouteApi,implode("\n",$array_texto))){
-        $msg['success'][] = 'Url adicionada em '.$caminhoRouteApi .'criado com sucesso';
+    if(file_force_contents($caminhoRouteApi,implode("\n",$array_texto))){
+        $msg['success'][] = $caminhoRouteApi;
     }else{
-        $msg['error'][] = 'Não foi possivel adicionar a url em '.$caminhoRouteApi ;
+        $msg['error'][] = $caminhoRouteApi ;
     }   
 }

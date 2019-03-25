@@ -1,30 +1,32 @@
 <?php
 // Turn off error reporting
 error_reporting(0);
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 $conf_db = new Conf_db();
 $helpers = new Helpers();
 
-$table                          = $_POST['table'];
-$nameComponent                  = $_POST['nameComponent'];
-$nomeComponent                  = $helpers->nomeComponent($nameComponent);
-$namerotaangular                = $_POST['namerotaangular'];
-$criar_fo                       = $_POST['criar_fo'];
-$caminho                        = $_POST['caminho'];
-$checkboxUrlAmigavel            = $_POST['checkboxUrlAmigavel'];
-$urlamigavel                    = $_POST['urlamigavel'];
-$checkboxRotaApiProtegidaToken  = $_POST['checkboxRotaApiProtegidaToken'];
-$inserir                        = $_POST['inserir'];
-$alterar                        = $_POST['alterar'];
-$detalhar                       = $_POST['detalhar'];
+@$table                          = $_POST['table'];
+@$nameComponent                  = $_POST['nameComponent'];
+@$nomeComponent                  = $helpers->nomeComponent($nameComponent);
+@$namerotaangular                = $_POST['namerotaangular'];
+@$criar_fo                       = $_POST['criar_fo'];
+@$caminho                        = $_POST['caminho'];
+@$checkboxUrlAmigavel            = $_POST['checkboxUrlAmigavel'];
+@$urlamigavel                    = $_POST['urlamigavel'];
+@$checkboxRotaApiProtegidaToken  = $_POST['checkboxRotaApiProtegidaToken'];
+@$inserir                        = $_POST['inserir'];
+@$alterar                        = $_POST['alterar'];
+@$detalhar                       = $_POST['detalhar'];
 
 //backend
-$checkboxRotaApi              = $_POST['checkboxRotaApi'];
-$criar_bo                     = $_POST['criar_bo'];
-$nomeRotaBE                   = $_POST['rotabe'];
-$checkboxRotaFeProtegidaToken = $_POST['checkboxRotaFeProtegidaToken'];
-$caminhoBackEnd               = $_POST['caminhoBackEnd'];
-$filtrarPorToken              = $_POST['filtrarPorToken'];
-$nameidtoken                  = $_POST['nameidtoken'];
+@$checkboxRotaApi              = $_POST['checkboxRotaApi'];
+@$criar_bo                     = $_POST['criar_bo'];
+@$nomeRotaBE                   = $_POST['rotabe'];
+@$checkboxRotaFeProtegidaToken = $_POST['checkboxRotaFeProtegidaToken'];
+@$caminhoBackEnd               = $_POST['caminhoBackEnd'];
+@$filtrarPorToken              = $_POST['filtrarPorToken'];
+@$nameidtoken                  = $_POST['nameidtoken'];
 
 $caminhoHttp = 'Http/';
 
@@ -40,7 +42,7 @@ $caminhoRaizBanckend = str_replace("/app",'',$caminhoBackEnd);
 
 $caminhoRaizFrontEnd = str_replace("/app\/",'',$caminho);
 $caminhoRaizFrontEnd = str_replace("/app",'',$caminho);
-$htaccess      = $_POST['confihtacces'];
+@$htaccess      = $_POST['confihtacces'];
 
 $pk        = $conf_db->getPk($table);
 $colunas   = $conf_db->getColumns($table);
@@ -90,6 +92,7 @@ if(isset($_POST['criar_fo'])){
     if(substr($caminho,strlen($caminho)-1,1) != '/' ){
         $caminho .='/';
     }
+    
 
     $caminhoComponent =$caminho.$nameComponent;
     $nameComponentQuebrar = explode('_',$nameComponent);
@@ -108,11 +111,13 @@ if(isset($_POST['criar_fo'])){
         $nameComponentTrocarUnderlinePorPrimieraMaiuscula =$nameComponent;
     }
     
+    $pastaApi = 'app';
     require_once("frontend/app/api.php");
     require_once("frontend/app/errorhandler.php");
     require_once("frontend/app/routes.php");
-
+    $pastaShared = "shared";
     require_once("shared/index.php");
+    $pastaComponentView = $nameComponent;
     require_once("frontend/componentHtml.php");
     require_once("frontend/componentTs.php");
     require_once("frontend/componentCss.php");
@@ -120,12 +125,15 @@ if(isset($_POST['criar_fo'])){
     require_once("frontend/componentModel.php");
     require_once("frontend/componentModule.php");
     if(!empty($inserir)){
+        $pastaComponentInsert = 'incluir';
         require_once("frontend/incluir/index_incluir.php");
     }    
     if(!empty($alterar)){
+        $pastaComponentAlterar = 'alterar';
         require_once("frontend/alterar/index_alterar.php");
     }
     if(!empty($detalhar)){
+        $pastaComponentDetalhar = 'detalhar';
         require_once("frontend/detalhar/index.php");
     }
     
@@ -140,5 +148,14 @@ if( isset($_POST['criar_fo']) || isset($_POST['criar_bo'])){
 // function file_force_contents($filename, $data, $flags = 0){
 //     if(!is_dir(dirname($filename)))
 //         mkdir(dirname($filename).'/', 0777, TRUE);
-//     return file_put_contents($filename, $data,$flags);
+//     return file_force_contents($filename, $data,$flags);
 // }
+
+function file_force_contents($dir, $contents){
+    $parts = explode('/', $dir);
+    $file = array_pop($parts);
+    $dir = '';
+    foreach($parts as $part)
+        if(!is_dir($dir .= "/$part")) mkdir($dir,0777);
+    return file_put_contents("$dir/$file", $contents);
+}

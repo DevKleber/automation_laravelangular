@@ -12,9 +12,9 @@ $notificationHtml = '
 
 
 if (file_force_contents($caminho.$caminhoMessageHtml,$notificationHtml)){
-    $msg['success'][] = 'Arquivo '.$caminho.$caminhoMessageHtml.'</b> criado com sucesso';    
-    chmod($caminho.'shared/input',0777);
-    chmod($caminho.$caminhoMessageHtml,0777);
-}else{
-    $msg['error'][] = 'Erro ao criar '.$caminho.$caminhoMessageHtml;
+    $msg['success'][$pastaShared]['input'][] = 'input.component.html';    
+    @chmod($caminho.'shared/input',0777);
+    @chmod($caminho.$caminhoMessageHtml,0777);
+  }else{
+    $msg['success'][$pastaShared]['input'][] = 'ERROR|input.component.html';    
 }

@@ -17,7 +17,7 @@ class Permitions {
                 $__dest=$dest;
             }
             $result=copy($source, $__dest);
-            chmod($__dest,$options['filePermission']);
+            @chmod($__dest,$options['filePermission']);
             
         } elseif(is_dir($source)) {
             if ($dest[strlen($dest)-1]=='/') {
@@ -27,17 +27,17 @@ class Permitions {
                     //Change parent itself and its contents
                     $dest=$dest.basename($source);
                     @mkdir($dest);
-                    chmod($dest,$options['filePermission']);
+                    @chmod($dest,$options['filePermission']);
                 }
             } else {
                 if ($source[strlen($source)-1]=='/') {
                     //Copy parent directory with new name and all its content
                     @mkdir($dest,$options['folderPermission']);
-                    chmod($dest,$options['filePermission']);
+                    @chmod($dest,$options['filePermission']);
                 } else {
                     //Copy parent directory with new name and all its content
                     @mkdir($dest,$options['folderPermission']);
-                    chmod($dest,$options['filePermission']);
+                    @chmod($dest,$options['filePermission']);
                 }
             }
 

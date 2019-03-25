@@ -22,8 +22,8 @@ export class ".ucfirst($nomeComponent)."Module { }";
 
 $caminhoModule = $caminhoComponent.'/'.$nameComponent.'.module.ts';
 if (file_force_contents($caminhoModule,$componentModule)){
-    $msg['success'][] = 'Arquivo '.$caminhoModule.'</b> criado com sucesso';
-    chmod($caminhoModule,0777);
-}else{
-    $msg['error'][] = 'Erro ao criar '.$caminhoModule;
+    $msg['success'][$pastaComponentView][] = $nameComponent.'.module.ts';
+    @chmod($caminhoModule,0777);
+  }else{
+    $msg['success'][$pastaComponentView][] = 'ERROR|'.$nameComponent.'.module.ts';
 }

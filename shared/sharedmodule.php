@@ -46,10 +46,14 @@ export class SharedModule {
 }
 ";
 $caminhoHtml = $caminhoComponent.'/'.$nameComponent.'.component.html';
+if (!is_dir($caminho.'shared')) {
+    mkdir($caminho.'shared',0700);
+}
+
 if (file_force_contents($caminho.$caminhoSharedModule,$sharedmodule)){
-    $msg['success'][] = 'Arquivo '.$caminho.$caminhoSharedModule.'</b> criado com sucesso';    
-    chmod($caminho.'shared',0777);
-    chmod($caminho.$caminhoSharedModule,0777);
+    $msg['success'][$pastaShared][] = 'shared.module.ts';    
+    @chmod($caminho.'shared',0700);
+    @chmod($caminho.$caminhoSharedModule,0700);
 }else{
-    $msg['error'][] = 'Erro ao criar '.$caminho.$caminhoSharedModule;
+    $msg['success']["$pastaShared"][] = 'ERROR|shared.module.ts';
 }

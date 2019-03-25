@@ -97,9 +97,9 @@ div.snackbar-container{text-align: center!important}
 
 
 if (file_force_contents($caminho.$caminhoSharedModuleNotificationCss,$notificationcss)){
-    $msg['success'][] = 'Arquivo '.$caminho.$caminhoSharedModuleNotificationCss.'</b> criado com sucesso';    
-    chmod($caminho.'shared',0777);
-    chmod($caminho.$caminhoSharedModuleNotificationCss,0777);
-}else{
-    $msg['error'][] = 'Erro ao criar '.$caminho.$caminhoSharedModuleNotificationCss;
+    $msg['success'][$pastaShared]['messages']['snackbar'][] = 'snackbar.component.css';    
+    @chmod($caminho.'shared',0777);
+    @chmod($caminho.$caminhoSharedModuleNotificationCss,0777);
+  }else{
+    $msg['success'][$pastaShared]['messages']['snackbar'][] = 'ERROR|snackbar.component.css';    
 }

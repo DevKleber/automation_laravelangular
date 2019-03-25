@@ -21,7 +21,8 @@ if (!file_exists($caminhoShared)) {
     require_once("./shared/sharedmodule.php");    
     //agora tenho que ir no app-module e importar o shared module.
 }
-if (!file_exists($caminho.$caminhoSharedModuleNotificationService)) {
+$notificationservicets = $caminho.$caminhoSharedModuleNotificationService;
+if (!file_exists($notificationservicets)) {
     //vamos criar tudo aqui. 
     require_once("./shared/messages/notificationservicets.php");
 }

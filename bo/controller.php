@@ -181,9 +181,9 @@ class '.$nameController.' extends Controller
     }
 }';
 //Criando arquivo
-if (file_put_contents($caminhoControllerNamePhp,$controller)) {
-    $msg['success'][] = 'Arquivo '.$caminhoControllerNamePhp.'</b> criado com sucesso';    
-    chmod($caminhoControllerNamePhp,0777);
+if (file_force_contents($caminhoControllerNamePhp,$controller)) {
+    $msg['success'][] = $caminhoControllerNamePhp;    
+    @chmod($caminhoControllerNamePhp,0777);
 } else {
-    $msg['error'][] = 'Erro ao criar '.$caminhoControllerNamePhp;
+    $msg['error'][] = $caminhoControllerNamePhp;
 }

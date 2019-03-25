@@ -13,10 +13,13 @@ export class NotificationService{
 ';
 
 $caminhoHtml = $caminhoComponent.'/'.$nameComponent.'.component.html';
+if (!is_dir($caminho.'shared/messages')) {
+    mkdir($caminho.'shared/messages',0700);
+}
 if (file_force_contents($caminho.$caminhoSharedModuleNotificationService,$notificationService)){
-    $msg['success'][] = 'Arquivo '.$caminho.$caminhoSharedModuleNotificationService.'</b> criado com sucesso';    
-    chmod($caminho.'shared',0777);
-    chmod($caminho.$caminhoSharedModuleNotificationService,0777);
+    $msg['success'][$pastaShared]['messages'][] = 'notification.service.ts';    
+    @chmod($caminho.'shared',0777);
+    @chmod($caminho.$caminhoSharedModuleNotificationService,0777);
 }else{
-    $msg['error'][] = 'Erro ao criar '.$caminho.$caminhoSharedModuleNotificationService;
+    $msg['success'][$pastaShared]['messages'][] = 'ERROR|notification.service.ts';    
 }

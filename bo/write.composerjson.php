@@ -48,9 +48,9 @@ if($rota_existente){
     
     //Adicionando nova regra no local correto
     $array_texto[$posicaoAddUrl] =$textoOriginal."\n".$addfiles;
-    if(file_put_contents($caminhoComposer,implode("\n",$array_texto))){
-        $msg['success'][] = 'Url adicionada em '.$caminhoComposer .'criado com sucesso';
+    if(file_force_contents($caminhoComposer,implode("\n",$array_texto))){
+        $msg['success'][] = $caminhoComposer;
     }else{
-        $msg['error'][] = 'Não foi possivel adicionar a url em '.$caminhoComposer ;
+        $msg['error'][] = $caminhoComposer ;
     }   
 }

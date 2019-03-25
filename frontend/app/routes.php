@@ -5,47 +5,56 @@ if (!file_exists($pathRoutes)) {
     $codigos = montarFileRoute($namerotaangular,$nameGetServices,$checkboxRotaApiProtegidaToken,$inserir,$alterar,$detalhar);
 }else{
     // $new,$encontrarPosicionar,$comparacao,$arquivo,$posicaosalvar=1
-    verificarSeRegraExiste("import { Routes } from '@angular/router'",'regra-0','import { Routes',$pathRoutes);
+    $ret = verificarSeRegraExiste("import { Routes } from '@angular/router'",'regra-0','import { Routes',$pathRoutes);
+    if($ret!='alert')$msg['warning'][$pastaApi][] = $ret.' .info';
     $canLoad = '';
     if($checkboxRotaApiProtegidaToken){
         $canLoad = ', canLoad: [LoggedInGuard], canActivate: [LoggedInGuard]';
     }
     $new = 'export const ROUTES: Routes = [
 ]';
-    $newList = "    { path: '$namerotaangular', loadChildren: './$namerotaangular/$namerotaangular.module#".$nameGetServices."Module'$canLoad },";
-    $newInsert = "    { path: '$namerotaangular/incluir', loadChildren: './$namerotaangular/incluir/incluir.module#IncluirModule' $canLoad },";
-    $newAlterar = "    { path: '$namerotaangular/alterar/:id', loadChildren: './$namerotaangular/alterar/alterar.module#AlterarModule' $canLoad },";
-    $newDetalhar = "    { path: '$namerotaangular/detalhar/:id', loadChildren: './$namerotaangular/detalhar/detalhar.module#DetalharModule'$canLoad },";
+    $newList = "        { path: '$namerotaangular', loadChildren: './$namerotaangular/$namerotaangular.module#".$nameGetServices."Module'$canLoad },";
+    $newInsert = "        { path: '$namerotaangular/incluir', loadChildren: './$namerotaangular/incluir/incluir.module#IncluirModule' $canLoad },";
+    $newAlterar = "        { path: '$namerotaangular/alterar/:id', loadChildren: './$namerotaangular/alterar/alterar.module#AlterarModule' $canLoad },";
+    $newDetalhar = "        { path: '$namerotaangular/detalhar/:id', loadChildren: './$namerotaangular/detalhar/detalhar.module#DetalharModule'$canLoad },";
     
-    verificarSeRegraExiste($new,'import { Routes }','export const ROUTES',$pathRoutes,2);
-    verificarSeRegraExiste($newList,"]","'$namerotaangular'",$pathRoutes);
+    $ret = verificarSeRegraExiste($new,'import { Routes }','export const ROUTES',$pathRoutes,2);
+    if($ret!='alert')$msg['warning'][$pastaApi][] = $ret.' .info';
+    $ret = verificarSeRegraExiste($newList,"]","'$namerotaangular'",$pathRoutes);
+    if($ret!='alert')$msg['warning'][$pastaApi][] = $ret.' .info';
     if(!empty($inserir)){
-        verificarSeRegraExiste($newInsert,"]","'$namerotaangular/incluir'",$pathRoutes);
+        $ret = verificarSeRegraExiste($newInsert,"]","'$namerotaangular/incluir'",$pathRoutes);
+        if($ret!='alert')$msg['warning'][$pastaApi][] = $ret.' .info';
     }    
     if(!empty($alterar)){
-        verificarSeRegraExiste($newAlterar,"]","'$namerotaangular/alterar/:id'",$pathRoutes);
+        $ret = verificarSeRegraExiste($newAlterar,"]","'$namerotaangular/alterar/:id'",$pathRoutes);
+        if($ret!='alert')$msg['warning'][$pastaApi][] = $ret.' .info';
     }
     if(!empty($detalhar)){
-        verificarSeRegraExiste($newDetalhar,"]","'$namerotaangular/detalhar/:id'",$pathRoutes);
+        $ret = verificarSeRegraExiste($newDetalhar,"]","'$namerotaangular/detalhar/:id'",$pathRoutes);
+        if($ret!='alert')$msg['warning'][$pastaApi][] = $ret.' .info';
     }
         
 }
 
 $new = "import { RouterModule, PreloadAllModules } from '@angular/router'";
-verificarSeRegraExiste($new,"@NgModule({","@angular/router",$caminho."app.module.ts");
+$ret = verificarSeRegraExiste($new,"@NgModule({","@angular/router",$caminho."app.module.ts");
+if($ret!='alert')$msg['warning'][$pastaApi][] = $ret.' .info';
 $new = "import { ROUTES } from './app.routes'";
-verificarSeRegraExiste($new,"@NgModule({","/app.routes",$caminho."app.module.ts");
+$ret = verificarSeRegraExiste($new,"@NgModule({","/app.routes",$caminho."app.module.ts");
+if($ret!='alert')$msg['warning'][$pastaApi][] = $ret.' .info';
 $new = "    RouterModule.forRoot(ROUTES),";
-verificarSeRegraExiste($new,"imports: [","RouterModule.forRoot",$caminho."app.module.ts",2);
+$ret = verificarSeRegraExiste($new,"imports: [","RouterModule.forRoot",$caminho."app.module.ts",2);
+if($ret!='alert')$msg['warning'][$pastaApi][] = $ret.' .info';
 
 if($codigos !=''){
     if (file_force_contents($pathRoutes,$codigos)){
-        $msg['success'][] = 'Arquivo '.$pathRoutes.'</b> criado com sucesso';    
-        chmod($caminho,0777);
-        chmod($pathRoutes,0777);
+        $msg['success'][$pastaApi][] = 'app.routes.ts';    
+        @chmod($caminho,0777);
+        @chmod($pathRoutes,0777);
         require_once("frontend/environments/env.php");
     }else{
-        $msg['error'][] = 'Erro ao criar '.$pathRoutes;
+        $msg['success'][$pastaApi][] = 'ERROR|app.routes.ts';
     }           
 }
 function montarFileRoute($namerotaangular,$nameGetServices,$checkboxRotaApiProtegidaToken,$inserir,$alterar,$detalhar){
@@ -78,7 +87,7 @@ function montarFileRoute($namerotaangular,$nameGetServices,$checkboxRotaApiProte
         
     
         { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule', canLoad: [LoggedInGuard] },
-        { path: '**', redirectTo: 'not-found', pathMatch: 'full' }
+        { path: '**', redirectTo: 'not-found', pathMatch: 'full' },
     ]";
     return $routes;
 
@@ -87,6 +96,7 @@ function montarFileRoute($namerotaangular,$nameGetServices,$checkboxRotaApiProte
 function verificarSeRegraExiste($new,$encontrarPosicionar,$comparacao,$arquivo,$posicaosalvar=1){
     $declarado = false;
     $new = $new;
+    $pastaApi ='app';
 
     $array_texto = file($arquivo,FILE_IGNORE_NEW_LINES);
     $encontrarPosicionar = $encontrarPosicionar;
@@ -112,7 +122,8 @@ function verificarSeRegraExiste($new,$encontrarPosicionar,$comparacao,$arquivo,$
     }
 
     if($declarado){
-        $msg['warning'][] = 'Já existe a regra <small><b>('.$new.')</b></small> em '.$arquivo;
+        return 'alert';
+        // return'Já existe a regra <small><b>('.$new.')</b></small> em app.routes.ts';
     }else{
         //Pegando regra atual para concatenar com nova regra
         $textoOriginal = $array_texto[$posicaoAddUrl];
@@ -122,10 +133,10 @@ function verificarSeRegraExiste($new,$encontrarPosicionar,$comparacao,$arquivo,$
             $array_texto[$posicaoAddUrl] =$textoOriginal."\n".$new;
         }
         //Adicionando nova regra no local correto
-        if(file_put_contents($arquivo,implode("\n",$array_texto))){
-            $msg['success'][] = 'Importação do shared modulo '.$arquivo .'criado com sucesso';
+        if(file_force_contents($arquivo,implode("\n",$array_texto))){
+            return $new .' <br />Adicionado routes.ts';
         }else{
-            $msg['error'][] = 'Não foi possivel adicionar a importação do shared module em '.$arquivo ;
+            return false;
         }   
     }
 }

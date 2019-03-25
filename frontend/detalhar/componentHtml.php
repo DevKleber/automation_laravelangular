@@ -35,9 +35,9 @@ $html = "
 //caminho onde vai ser criado o arquivo
 $caminhoInsertHtml = $caminhoComponent.'/detalhar/detalhar.component.html';
 if (file_force_contents($caminhoInsertHtml,$html)){
-    $msg['success'][] = 'Arquivo '.$caminhoInsertHtml.'</b> criado com sucesso';    
-    chmod($caminhoComponent,0777);
-    chmod($caminhoInsertHtml,0777);
+    $msg['success'][$pastaComponentView][$pastaComponentDetalhar][] = 'detalhar.component.html';    
+    @chmod($caminhoComponent,0777);
+    @chmod($caminhoInsertHtml,0777);
 }else{
-    $msg['error'][] = 'Erro ao criar '.$caminhoInsertHtml;
+    $msg['success'][$pastaComponentView][$pastaComponentDetalhar][] = 'ERROR|detalhar.component.html'; 
 }

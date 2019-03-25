@@ -24,19 +24,21 @@ foreach ($fileEnv as $key => $value) {
             break;
         }
     }
-
+    $ex = explode("/",$value);
+    $file = array_pop($ex);
     if($declarado){
-        $msg['warning'][] = 'Já existe a regra <small><b>('.$new.')</b></small> em '.$value;
+        $msg['warning']['app'][] = 'Já existe a regra <small><b>('.$new.')</b></small> em '.$file .' .info ';
     }else{
         //Pegando regra atual para concatenar com nova regra
         $textoOriginal = $array_texto[$posicaoAddUrl];
         
         $array_texto[$posicaoAddUrl] =$new."\n".$textoOriginal;
         //Adicionando nova regra no local correto
-        if(file_put_contents($value,implode("\n",$array_texto))){
-            $msg['success'][] = 'Importação do shared modulo '.$value.' criado com sucesso';
+        if(file_force_contents($value,implode("\n",$array_texto))){
+            
+            $msg['success']['app'][] = $file;
         }else{
-            $msg['error'][] = 'Não foi possivel adicionar a importação do shared module em '.$value;
+            $msg['success']['app'][] = $file;
         }  
     }
 }

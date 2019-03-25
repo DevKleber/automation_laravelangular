@@ -112,8 +112,8 @@ export class ".$nomeComponent."Service {
 
 $caminhoService = $caminhoComponent.'/'.$nameComponent.'.service.ts';
 if (file_force_contents($caminhoService,$componentService)){
-    $msg['success'][] = 'Arquivo '.$caminhoService.'</b> criado com sucesso';
-    chmod($caminhoService,0777);
-}else{
-    $msg['error'][] = 'Erro ao criar '.$caminhoService;
+    $msg['success'][$pastaComponentView][] = $nameComponent.'.service.ts';
+    @chmod($caminhoService,0777);
+  }else{
+    $msg['success'][$pastaComponentView][] = 'ERROR|'.$nameComponent.'.service.ts';
 }

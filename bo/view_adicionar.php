@@ -92,9 +92,9 @@ $gridDiv .='<?php '.$gridtop.'
 //caminho onde vai ser criado o arquivo
 $caminhoboAdicionar = $caminho.'admin/includes/views/'.$nameComponent.'/';
 //Criando arquivo
-if(file_put_contents($caminhoboAdicionar . 'adicionar.php', $gridDiv)){
-    $msg['success'][] = 'Arquivo '.$caminhoboAdicionar .'<b>'. 'adicionar.php </b>criado com sucesso';
-    chmod($caminhoboAdicionar.'adicionar.php',0777);
+if(file_force_contents($caminhoboAdicionar . 'adicionar.php', $gridDiv)){
+    $msg['success'][] = $caminhoboAdicionar;
+    @chmod($caminhoboAdicionar.'adicionar.php',0777);
 } else {
-    $msg['error'][] = 'Erro ao criar '.$caminhoboAdicionar .'<b>'. 'adicionar.php</b>';
+    $msg['error'][] = $caminhoboAdicionar;
 }

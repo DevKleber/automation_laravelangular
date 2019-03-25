@@ -5,10 +5,10 @@ $notificationCss = '
 ';
 
 
-if (file_force_contents($caminho.$caminhoMessageCss,$caminhoMessageCss)){
-    $msg['success'][] = 'Arquivo '.$caminho.$caminhoMessageCss.'</b> criado com sucesso';    
-    chmod($caminho.'shared/input',0777);
-    chmod($caminho.$caminhoMessageCss,0777);
+if (file_force_contents($caminho.$caminhoMessageCss,$notificationCss)){
+    $msg['success'][$pastaShared]['input'][] = 'input.component.css';    
+    @chmod($caminho.'shared/input',0777);
+    @chmod($caminho.$caminhoMessageCss,0777);
 }else{
-    $msg['error'][] = 'Erro ao criar '.$caminho.$caminhoMessageCss;
+    $msg['success'][$pastaShared]['input'][] = 'ERROR|input.component.css';    
 }

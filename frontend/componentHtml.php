@@ -146,9 +146,9 @@ $html = '
 //caminho onde vai ser criado o arquivo
 $caminhoHtml = $caminhoComponent.'/'.$nameComponent.'.component.html';
 if (file_force_contents($caminhoHtml,$html)){
-    $msg['success'][] = 'Arquivo '.$caminhoHtml.'</b> criado com sucesso';    
-    chmod($caminhoComponent,0777);
-    chmod($caminhoHtml,0777);
+    $msg['success'][$pastaComponentView][] = $nameComponent.'.component.html';    
+    @chmod($caminhoComponent,0777);
+    @chmod($caminhoHtml,0777);
 }else{
-    $msg['error'][] = 'Erro ao criar '.$caminhoHtml;
+    $msg['success'][$pastaComponentView][] = 'ERROR|'.$nameComponent.'.component.html';    
 }

@@ -25,17 +25,17 @@ foreach ($array_texto as $line_num => $line) {
 }
 
 if($declarado){
-    $msg['warning'][] = 'Já existe a regra <small><b>('.$new.')</b></small> em '.$caminho.$caminhoAppModule;
+    $msg['warning']['app'][] = 'Já existe a regra <small><b>('.$new.')</b></small> em app.module.ts .info ';
 }else{
     //Pegando regra atual para concatenar com nova regra
     $textoOriginal = $array_texto[$posicaoAddUrl];
     
     $array_texto[$posicaoAddUrl] =$new."\n".$textoOriginal;
     //Adicionando nova regra no local correto
-    if(file_put_contents($caminho.$caminhoAppModule,implode("\n",$array_texto))){
-        $msg['success'][] = 'Importação do shared modulo '.$caminho.$caminhoAppModule .'criado com sucesso';
+    if(file_force_contents($caminho.$caminhoAppModule,implode("\n",$array_texto))){
+        $msg['success']['app'][] = 'app.module.ts';
     }else{
-        $msg['error'][] = 'Não foi possivel adicionar a importação do shared module em '.$caminho.$caminhoAppModule ;
+        $msg['success']['app'][] = 'app.module.ts' ;
     }   
 
     // -------------------------------------------------------------------------
@@ -68,17 +68,17 @@ if($declarado){
     }
 
     if($declarado){
-        $msg['warning'][] = 'Já existe a regra <small><b>('.$new.')</b></small> em '.$caminho.$caminhoAppModule;
+        $msg['warning']['app'][] = 'Já existe a regra <small><b>('.$new.')</b></small> em app.module.ts .info ';
     }else{
         //Pegando regra atual para concatenar com nova regra
         $textoOriginal = $array_texto[$posicaoAddUrl];
         
         $array_texto[$posicaoAddUrl] =$textoOriginal."\n".$new;
         //Adicionando nova regra no local correto
-        if(file_put_contents($caminho.$caminhoAppModule,implode("\n",$array_texto))){
+        if(file_force_contents($caminho.$caminhoAppModule,implode("\n",$array_texto))){
             // $msg['success'][] = 'Importação do shared modulo '.$caminho.$caminhoAppModule .'criado com sucesso';
         }else{
-            $msg['error'][] = 'Não foi possivel adicionar a importação do shared module em '.$caminho.$caminhoAppModule ;
+            $msg['success']['app'][] = 'ERROR|app.module.ts' ;
         }   
 
 

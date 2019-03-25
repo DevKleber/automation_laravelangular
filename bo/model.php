@@ -24,9 +24,9 @@ class '.$c.' extends Model
 //caminho onde vai ser criado o arquivo
 $caminhoModel = $caminhoModel.ucfirst($nameComponent).'.php';
 //Criando arquivo
-if (file_put_contents($caminhoModel,$modAdmin)) {
-    $msg['success'][] = 'Arquivo '.$caminhoModel.'</b> criado com sucesso';    
-    chmod($caminhoModel,0777);
+if (file_force_contents($caminhoModel,$modAdmin)) {
+    $msg['success'][] = $caminhoModel;    
+    @chmod($caminhoModel,0777);
 } else {
-    $msg['error'][] = 'Erro ao criar '.$caminhoModel;
+    $msg['error'][] = $caminhoModel;
 }

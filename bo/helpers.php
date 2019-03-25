@@ -97,10 +97,10 @@ class Helpers{
 ';
 
 //Criando arquivo
-if(file_put_contents($caminhoHelpers,$helpers)){
-    chmod($caminhoHelpers,0777);
-    $msg['success'][] = 'Arquivo '.$caminhoHelpers . ' criado com sucesso';
+if(file_force_contents($caminhoHelpers,$helpers)){
+    @chmod($caminhoHelpers,0777);
+    $msg['success'][] = $caminhoHelpers;
 } else {
-    $msg['error'][] = 'Erro ao criar '.$caminhoHelpers ;
+    $msg['error'][] = $caminhoHelpers ;
 }
 

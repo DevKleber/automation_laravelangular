@@ -16,8 +16,8 @@ $componentModel = 'export class '.$nomeComponent.'{
 
 $caminhoModel = $caminhoComponent.'/'.$nameComponent.'.model.ts';
 if (file_force_contents($caminhoModel,$componentModel)){
-    $msg['success'][] = 'Arquivo '.$caminhoModel.'</b> criado com sucesso';
-    chmod($caminhoModel,0777);
+    $msg['success'][$pastaComponentView][] = $nameComponent.'.model.ts';
+    @chmod($caminhoModel,0777);
 }else{
-    $msg['error'][] = 'Erro ao criar '.$caminhoModel;
+    $msg['success'][$pastaComponentView][] = 'ERROR|'.$nameComponent.'.model.ts';
 }

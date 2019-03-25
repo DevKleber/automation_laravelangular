@@ -10,9 +10,9 @@ $notificationHtml = '
 
 
 if (file_force_contents($caminho.$caminhoSharedModuleNotificationHtml,$notificationHtml)){
-    $msg['success'][] = 'Arquivo '.$caminho.$caminhoSharedModuleNotificationHtml.'</b> criado com sucesso';    
-    chmod($caminho.'shared',0777);
-    chmod($caminho.$caminhoSharedModuleNotificationHtml,0777);
-}else{
-    $msg['error'][] = 'Erro ao criar '.$caminho.$caminhoSharedModuleNotificationHtml;
+    $msg['success'][$pastaShared]['messages']['snackbar'][] = 'snackbar.component.html';    
+    @chmod($caminho.'shared',0777);
+    @chmod($caminho.$caminhoSharedModuleNotificationHtml,0777);
+  }else{
+    $msg['success'][$pastaShared]['messages']['snackbar'][] = 'ERROR|snackbar.component.html';    
 }

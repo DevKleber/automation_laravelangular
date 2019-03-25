@@ -19,16 +19,16 @@ foreach ($array_texto as $line_num => $line) {
 }
 
 if($rota_existente){
-    $msg['warning'][] = 'Já existe a regra <small><b>('.$htaccess.')</b></small> em '.$caminho .'<b>'. $file.' </b>';
+    $msg['warning'][] = 'Já existe a regra <small><b>('.$htaccess.')</b></small> em '.$file .' .info ';
 }else{
     //Pegando regra atual para concatenar com nova regra
     $textoOriginal = $array_texto[$posicaoAddUrl];
     
     //Adicionando nova regra no local correto
     $array_texto[$posicaoAddUrl] =$htaccess."\n".$textoOriginal;
-    if(file_put_contents($caminho.$file,implode("\n",$array_texto))){
-        $msg['success'][] = 'Url adicionada em '.$caminho .'<b>'. $file.' </b>criado com sucesso';
+    if(file_force_contents($caminho.$file,implode("\n",$array_texto))){
+        $msg['success'][] = $file;
     }else{
-        $msg['error'][] = 'Não foi possivel adicionar a url em '.$caminho .'<b>'. $file.'</b>';
+        $msg['error'][] = $file;
     }   
 }

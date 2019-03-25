@@ -34,10 +34,9 @@ if(!$menu_existente){
     $array_texto[$posicaoAddMenu] =$addmenu."\n".$textoOriginal;
  
     //Criando e sobrescrevendo o arquivo antigo
-    if(file_put_contents($caminhoMenu.$file,implode("\n",$array_texto))){
-        $msg['success'][] = 'Menu adicionada em '.$caminhoMenu .'<b>'. $file.' </b>';
+    if(file_force_contents($caminhoMenu.$file,implode("\n",$array_texto))){
+        $msg['success'][] = $file;
     }else{
-        echo "não deu certo";
-        $msg['error'][] = 'Não foi possivel adicionar o menu '.$caminhoMenu .'<b>'. $file.'</b>';
+        $msg['error'][] = $caminhoMenu;
     }   
 }

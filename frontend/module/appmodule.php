@@ -48,15 +48,15 @@ if(!$providersDeclarado){
     }
     
     if($declarado){
-        $msg['warning'][] = 'Já existe a regra <small><b>('.$new.')</b></small> em '.$appModule;
+        $msg['warning'][] = 'Já existe a regra <small><b>('.$new.')</b></small> em app.module.ts .info ';
     }else{
         //Pegando regra atual para concatenar com nova regra
         $textoOriginal = $array_texto[$posicaoAddUrl];
         
         $array_texto[$posicaoAddUrl] =$new;
         //Adicionando nova regra no local correto
-        if(file_put_contents($appModule,implode("\n",$array_texto))){
-            $msg['success'][] = 'Importação do shared modulo '.$appModule.' criado com sucesso';
+        if(file_force_contents($appModule,implode("\n",$array_texto))){
+            $msg['success']['app'][] = 'app.module.ts';
 
             //adicionando os imports do error
             $declarado = false;
@@ -85,24 +85,24 @@ import { ErrorHandler } from '@angular/core';";
             }
 
             if($declarado){
-                $msg['warning'][] = 'Já existe a regra <small><b>('.$new.')</b></small> em '.$appModule;
+                $msg['warning'][] = 'Já existe a regra <small><b>('.$new.')</b></small> em app.module.ts .info ';
             }else{
                 //Pegando regra atual para concatenar com nova regra
                 $textoOriginal = $array_texto[$posicaoAddUrl];
                 
                 $array_texto[$posicaoAddUrl] =$new."\n".$textoOriginal;
                 //Adicionando nova regra no local correto
-                if(file_put_contents($appModule,implode("\n",$array_texto))){
-                    $msg['success'][] = 'Importação do shared modulo '.$appModule .'criado com sucesso';
+                if(file_force_contents($appModule,implode("\n",$array_texto))){
+                    $msg['success']['app'][] = 'app.module.ts';
                 }else{
-                    $msg['error'][] = 'Não foi possivel adicionar a importação do shared module em '.$appModule ;
+                    $msg['success']['app'][] = 'ERROR|app.module.ts';
                 }   
             }
             //adicionando os imports do error
 
 
         }else{
-            $msg['error'][] = 'Não foi possivel adicionar a importação do shared module em '.$appModule;
+            $msg['success']['app'][] = 'ERROR|app.module.ts';
         }  
     }
 }

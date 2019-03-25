@@ -21,9 +21,9 @@ export class IncluirModule { }";
 //caminho onde vai ser criado o arquivo
 $caminhoInsertModule = $caminhoComponent.'/incluir/incluir.module.ts';
 if (file_force_contents($caminhoInsertModule,$module)){
-    $msg['success'][] = 'Arquivo '.$caminhoInsertModule.'</b> criado com sucesso';    
-    chmod($caminhoComponent,0777);
-    chmod($caminhoInsertModule,0777);
-}else{
-    $msg['error'][] = 'Erro ao criar '.$caminhoInsertModule;
+    $msg['success'][$pastaComponentView][$pastaComponentInsert][] = 'incluir.module.ts';    
+    @chmod($caminhoComponent,0777);
+    @chmod($caminhoInsertModule,0777);
+  }else{
+    $msg['success'][$pastaComponentView][$pastaComponentInsert][] = 'ERROR|incluir.module.ts';    
 }

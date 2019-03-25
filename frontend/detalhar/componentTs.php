@@ -65,9 +65,9 @@ export class DetalharComponent implements OnInit {
 $caminhoTs = $caminhoComponent.'/detalhar/detalhar.component.ts';
 
 if (file_force_contents($caminhoTs,$component)){
-    $msg['success'][] = 'Arquivo '.$caminhoTs.'</b> criado com sucesso';    
-    chmod($caminhoComponent,0777);
-    chmod($caminhoTs,0777);
-}else{
-    $msg['error'][] = 'Erro ao criar '.$caminhoTs;
+    $msg['success'][$pastaComponentView][$pastaComponentDetalhar][] = 'detalhar.component.ts';    
+    @chmod($caminhoComponent,0777);
+    @chmod($caminhoTs,0777);
+  }else{
+    $msg['success'][$pastaComponentView][$pastaComponentDetalhar][] = 'ERROR|detalhar.component.ts';    
 }

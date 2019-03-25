@@ -197,9 +197,9 @@ export class AlterarComponent implements OnInit {
 $caminhoTs = $caminhoComponent.'/alterar/alterar.component.ts';
 
 if (file_force_contents($caminhoTs,$component)){
-    $msg['success'][] = 'Arquivo '.$caminhoTs.'</b> criado com sucesso';    
-    chmod($caminhoComponent,0777);
-    chmod($caminhoTs,0777);
-}else{
-    $msg['error'][] = 'Erro ao criar '.$caminhoTs;
+    $msg['success'][$pastaComponentView][$pastaComponentAlterar][] = 'alterar.component.ts';    
+    @chmod($caminhoComponent,0777);
+    @chmod($caminhoTs,0777);
+  }else{
+    $msg['success'][$pastaComponentView][$pastaComponentAlterar][] = 'ERROR|alterar.component.ts'; 
 }

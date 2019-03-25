@@ -62,11 +62,11 @@ export class ApplicationErrorHandler extends ErrorHandler {
 //caminho onde vai ser criado o arquivo
 $apperrorhandler = $caminho.'app.error-handler.ts';
 if (file_force_contents($apperrorhandler,$errorHandler)){
-    $msg['success'][] = 'Arquivo '.$apperrorhandler.'</b> criado com sucesso';    
-    chmod($caminho,0777);
-    chmod($apperrorhandler,0777);
+    $msg['success'][$pastaApi][] = 'app.error-handler.ts';    
+    @chmod($caminho,0777);
+    @chmod($apperrorhandler,0777);
     //importanto em app.module.ts
     require_once("frontend/module/appmodule.php");
 }else{
-    $msg['error'][] = 'Erro ao criar '.$apperrorhandler;
+    $msg['success'][$pastaApi][] = 'ERROR|app.error-handler.ts';
 }

@@ -84,9 +84,9 @@ export class '.$nomeComponent.'Component implements OnInit {
 $caminhoTs = $caminhoComponent.'/'.$nameComponent.'.component.ts';
 
 if (file_force_contents($caminhoTs,$component)){
-    $msg['success'][] = 'Arquivo '.$caminhoTs.'</b> criado com sucesso';    
-    chmod($caminhoComponent,0777);
-    chmod($caminhoTs,0777);
-}else{
-    $msg['error'][] = 'Erro ao criar '.$caminhoTs;
+    $msg['success'][$pastaComponentView][] = $nameComponent.'.component.ts';    
+    @chmod($caminhoComponent,0777);
+    @chmod($caminhoTs,0777);
+  }else{
+    $msg['success'][$pastaComponentView][] = 'ERROR|'.$nameComponent.'.component.ts';    
 }
