@@ -2,7 +2,7 @@
 $pathRoutes = $caminho.'app.routes.ts';
 $codigos = '';
 if (!file_exists($pathRoutes)) {
-    $codigos = montarFileRoute($namerotaangular,$nameGetServices,$checkboxRotaApiProtegidaToken);
+    $codigos = montarFileRoute($namerotaangular,$nameGetServices,$checkboxRotaApiProtegidaToken,$inserir,$alterar,$detalhar);
 }else{
     // $new,$encontrarPosicionar,$comparacao,$arquivo,$posicaosalvar=1
     verificarSeRegraExiste("import { Routes } from '@angular/router'",'regra-0','import { Routes',$pathRoutes);
@@ -19,9 +19,15 @@ if (!file_exists($pathRoutes)) {
     
     verificarSeRegraExiste($new,'import { Routes }','export const ROUTES',$pathRoutes,2);
     verificarSeRegraExiste($newList,"]","'$namerotaangular'",$pathRoutes);
-    verificarSeRegraExiste($newInsert,"]","'$namerotaangular/incluir'",$pathRoutes);
-    verificarSeRegraExiste($newAlterar,"]","'$namerotaangular/alterar/:id'",$pathRoutes);
-    verificarSeRegraExiste($newDetalhar,"]","'$namerotaangular/detalhar/:id'",$pathRoutes);
+    if(!empty($inserir)){
+        verificarSeRegraExiste($newInsert,"]","'$namerotaangular/incluir'",$pathRoutes);
+    }    
+    if(!empty($alterar)){
+        verificarSeRegraExiste($newAlterar,"]","'$namerotaangular/alterar/:id'",$pathRoutes);
+    }
+    if(!empty($detalhar)){
+        verificarSeRegraExiste($newDetalhar,"]","'$namerotaangular/detalhar/:id'",$pathRoutes);
+    }
         
 }
 
@@ -42,11 +48,21 @@ if($codigos !=''){
         $msg['error'][] = 'Erro ao criar '.$pathRoutes;
     }           
 }
-function montarFileRoute($namerotaangular,$nameGetServices,$checkboxRotaApiProtegidaToken){
+function montarFileRoute($namerotaangular,$nameGetServices,$checkboxRotaApiProtegidaToken,$inserir,$alterar,$detalhar){
     $nameGetServices = ucfirst($nameGetServices);
     $canLoad = '';
     if($checkboxRotaApiProtegidaToken){
         $canLoad = ', canLoad: [LoggedInGuard], canActivate: [LoggedInGuard]';
+    }
+
+    if(!empty($inserir)){
+        $rotaInserir = "{ path: '$namerotaangular/incluir', loadChildren: './$namerotaangular/incluir/incluir.module#IncluirModule' $canLoad },";
+    }    
+    if(!empty($alterar)){
+        $rotaAlterar = "{ path: '$namerotaangular/alterar/:id', loadChildren: './$namerotaangular/alterar/alterar.module#AlterarModule' $canLoad },";
+    }
+    if(!empty($detalhar)){
+        $rotaDetalhar = "{ path: '$namerotaangular/detalhar/:id', loadChildren: './$namerotaangular/detalhar/detalhar.module#DetalharModule'$canLoad },";
     }
 
     $routes ="import { Routes } from '@angular/router'
@@ -56,9 +72,10 @@ function montarFileRoute($namerotaangular,$nameGetServices,$checkboxRotaApiProte
         //{ path: 'login', component: LoginComponent },
         
         { path: '$namerotaangular', loadChildren: './$namerotaangular/$namerotaangular.module#".$nameGetServices."Module'$canLoad },
-        { path: '$namerotaangular/incluir', loadChildren: './$namerotaangular/incluir/incluir.module#IncluirModule' $canLoad },
-        { path: '$namerotaangular/alterar/:id', loadChildren: './$namerotaangular/alterar/alterar.module#AlterarModule' $canLoad },
-        { path: '$namerotaangular/detalhar/:id', loadChildren: './$namerotaangular/detalhar/detalhar.module#DetalharModule'$canLoad },
+        $rotaInserir
+        $rotaAlterar
+        $rotaDetalhar
+        
     
         { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule', canLoad: [LoggedInGuard] },
         { path: '**', redirectTo: 'not-found', pathMatch: 'full' }

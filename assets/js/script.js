@@ -1,3 +1,4 @@
+ocultar();
 function checkCriarBo() {
 
     var check = document.getElementById('checkboxBo').checked;
@@ -24,13 +25,17 @@ function checkCriarFo() {
 
     var check = document.getElementById('checkboxFo').checked;
     if (check) {
+        document.getElementById("blocofrontend").style.display = "block";
         document.getElementById("urlami").style.display = "block";
         document.getElementById("caminhofe").style.display = "block";
+        document.getElementById("qualcriar").style.display = "block";
 
     } else {
+        document.getElementById("blocofrontend").style.display = "none";
         document.getElementById("urlami").style.display = "none";
         document.getElementById("caminhofe").style.display = "none";
         document.getElementById("urlAmigavel").style.display = "none";
+        document.getElementById("qualcriar").style.display = "none";
 
         document.getElementById('caminhoRouteAngular').checked = false;
     }
@@ -149,4 +154,12 @@ function validateForm() {
     // snackbar("Escolha LARAVEL (BACK-END) ou ANGULAR (FRONT-END), obrigatório!");
     // return false;
 
+}
+function ocultar(){
+    document.getElementById("blocofrontend").style.display = "none";
+    document.getElementById("urlami").style.display = "none";
+    document.getElementById("caminhofe").style.display = "none";
+    document.getElementById("urlAmigavel").style.display = "none";
+    document.getElementById("qualcriar").style.display = "none";
+    document.getElementById("div_rotaapi").style.display = "none";
 }

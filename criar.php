@@ -13,6 +13,9 @@ $caminho                        = $_POST['caminho'];
 $checkboxUrlAmigavel            = $_POST['checkboxUrlAmigavel'];
 $urlamigavel                    = $_POST['urlamigavel'];
 $checkboxRotaApiProtegidaToken  = $_POST['checkboxRotaApiProtegidaToken'];
+$inserir                        = $_POST['inserir'];
+$alterar                        = $_POST['alterar'];
+$detalhar                       = $_POST['detalhar'];
 
 //backend
 $checkboxRotaApi              = $_POST['checkboxRotaApi'];
@@ -116,14 +119,15 @@ if(isset($_POST['criar_fo'])){
     require_once("frontend/componentService.php");
     require_once("frontend/componentModel.php");
     require_once("frontend/componentModule.php");
-    // criar component inserir 
-    require_once("frontend/incluir/index_incluir.php");
-    
-    // criar component alterar 
-    require_once("frontend/alterar/index_alterar.php");
-    // criar component detalhar
-    // require_once("frontend/incluir/index_incluir.php");
-    // die;
+    if(!empty($inserir)){
+        require_once("frontend/incluir/index_incluir.php");
+    }    
+    if(!empty($alterar)){
+        require_once("frontend/alterar/index_alterar.php");
+    }
+    if(!empty($detalhar)){
+        require_once("frontend/detalhar/index.php");
+    }
     
     
 }   
@@ -133,8 +137,8 @@ if( isset($_POST['criar_fo']) || isset($_POST['criar_bo'])){
    new Mensagem($msg);
 }
 
-function file_force_contents($filename, $data, $flags = 0){
-    if(!is_dir(dirname($filename)))
-        mkdir(dirname($filename).'/', 0777, TRUE);
-    return file_put_contents($filename, $data,$flags);
-}
+// function file_force_contents($filename, $data, $flags = 0){
+//     if(!is_dir(dirname($filename)))
+//         mkdir(dirname($filename).'/', 0777, TRUE);
+//     return file_put_contents($filename, $data,$flags);
+// }

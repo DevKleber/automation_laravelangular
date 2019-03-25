@@ -43,32 +43,61 @@ $conf_db = new Conf_db();
                     <input class="form-check-input checkbox " type="checkbox" onclick="checkCriarFo()" value="fo" id="checkboxFo" name="criar_fo" >
                     <span class="checkmark"></span>
                 </label>
-
-                <div  class="form-group mt-15 ml-20 newBloco">
-                    <div class="col-md-12 m-0  hide" id="caminhofe" >
-                        <div id="path_fo" class="form-group  mt-15">
-                            <label for="exampleForm">Caminho do Angular</label><br />
-                            <input type="text" name="caminho" class="form-control inputCheck" id="caminhoFrontEnd"  placeholder="/home/documents/angular/automation/src/app (Caminho raiz do sistema até o APP)" >
+                <div id="blocofrontend">
+                    <div class="form-group mt-15 ml-20 newBloco">
+                            
+                        <div class="col-md-12 m-0 hide " id="qualcriar" >
+                            <div class="col-md-2 m-0 f-left" id="" >
+                                <label class="check">Deseja Criar?
+                                </label>
+                            </div>
+                            <div class="col-md-2 m-0 f-left" id="" >
+                                <label class="check">Inserir
+                                    <input class="form-check-input" type="checkbox"  value="inserir" id="inserir" name="inserir" checked>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-md-2 m-0  f-left" id="" >
+                                <label class="check">Alterar
+                                    <input class="form-check-input" type="checkbox"  value="alterar" id="alterar" name="alterar" checked>
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-md-2 m-0  f-left" id="" >
+                                <label class="check">Detalhar
+                                    <input class="form-check-input" type="checkbox"  value="detalhar" id="detalhar" name="detalhar" checked >
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 m-0  hide" id="urlami">
-                        <label class="check">Criar rota angular?
-                            <input class="form-check-input" type="checkbox" onclick="CriarUrl()" value="fo" id="caminhoRouteAngular" name="caminhoRouteAngular" >
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
-                    <div class="hide mt-30 ml-50 newBloco"  id="urlAmigavel">
-                        <div class="mt-15">
-                            <label class="check">Criar rota protegida por token?
-                                <input class="form-check-input" type="checkbox" onclick="CriarUrl()" value="fo" id="checkboxRotaApiProtegidaToken" name="checkboxRotaApiProtegidaToken" checked="checked">
+                        <div class="clear"></div>
+
+                        
+                        <div class="col-md-12 m-0  hide" id="caminhofe" >
+                            <div id="path_fo" class="form-group  mt-15">
+                                <label for="exampleForm">Caminho do Angular</label><br />
+                                <input type="text" name="caminho" class="form-control inputCheck" id="caminhoFrontEnd"  placeholder="/home/documents/angular/automation/src/app (Caminho raiz do sistema até o APP)" >
+                            </div>
+                        </div>
+                        <div class="col-md-6 m-0 hide" id="urlami">
+                            <label class="check">Criar rota angular?
+                                <input class="form-check-input" type="checkbox" onclick="CriarUrl()" value="fo" id="caminhoRouteAngular" name="caminhoRouteAngular" >
                                 <span class="checkmark"></span>
                             </label>
                         </div>
-                        <div class="col-md-4 m-0 p-0">
-                            <label for="exampleForm">Nome da rota </label><br />
-                            <input type="text" id="namerotaangular" onKeyup="alterarUrlAmigavel()" name="namerotaangular" class="form-control inputCheck"  placeholder="contactos|contacts|contact">
+                        <div class="mt-30 ml-50 newBloco hide"  id="urlAmigavel">
+                            <div class="mt-15">
+                                <label class="check">Criar rota protegida por token?
+                                    <input class="form-check-input" type="checkbox" onclick="CriarUrl()" value="fo" id="checkboxRotaApiProtegidaToken" name="checkboxRotaApiProtegidaToken" >
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="col-md-4 m-0 p-0">
+                                <label for="exampleForm">Nome da rota </label><br />
+                                <input type="text" id="namerotaangular" onKeyup="alterarUrlAmigavel()" name="namerotaangular" class="form-control inputCheck"  placeholder="contactos|contacts|contact">
+                            </div>
+                            
                         </div>
-                        
                     </div>
                 </div>
                 <!-- bloco frontend -->
@@ -97,7 +126,7 @@ $conf_db = new Conf_db();
                     <div id="criarbe" class="hide form-group mt-15 ">
                         <div class="mt-15">
                             <label class="check">Criar rota protegida por token?
-                                <input class="form-check-input" type="checkbox" onclick="CriarTokenProtegido()" value="fo" id="checkboxRotaFeProtegidaToken" name="checkboxRotaFeProtegidaToken" checked="checked">
+                                <input class="form-check-input" type="checkbox" onclick="CriarTokenProtegido()" value="fo" id="checkboxRotaFeProtegidaToken" name="checkboxRotaFeProtegidaToken" >
                                 <span class="checkmark"></span>
                             </label>
                         </div>
@@ -105,7 +134,7 @@ $conf_db = new Conf_db();
 
                             <div class="mt-15  hide" id="div_filtrarPorToken">
                                 <label class="check">Trazer registros filtrando por token ex: where id = idtoken?
-                                    <input class="form-check-input" type="checkbox" onclick="findByToken()" value="fo" id="filtrarPorToken" name="filtrarPorToken" checked="checked">
+                                    <input class="form-check-input" type="checkbox" onclick="findByToken()" value="fo" id="filtrarPorToken" name="filtrarPorToken" >
                                     <span class="checkmark"></span>
                                 </label>
                             </div>

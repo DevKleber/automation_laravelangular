@@ -8,14 +8,16 @@ $nameRemoverUltimo = $helpers->removerUltimoCaracter($nameGetServices);
 
 $nameRecebeService = lcfirst($nameGetServices);
 // $nameGetServices   = ucfirst($nameGetServices);
-$componentName     = ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Component';
+$componentName     = ucfirst($nomeComponent).'Component';
 
 $variaveis = '';
 $ifgetImg = "";
 $save ='save(form) {
-    this.'.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service.save(form)
+    this.'.lcfirst($nomeComponent).'Service.save(form)
   }';
+$imports = "";
 if($uparImage){
+  $imports = "import { API_PATH_IMG } from \'./../../app.api\';";
   $ifgetImg = "if('.lcfirst($nomeComponent).'.img){
     this.img = `${API_PATH_IMG}/'.lcfirst($nomeComponent).'/${'.lcfirst($nomeComponent).'.img}`
   }";
@@ -31,7 +33,7 @@ if($uparImage){
     if (this.selectedFile) {
       this.loader = true;
       uploadData.append('fileimg', this.selectedFile, this.selectedFile.name);
-      this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."Service.save(uploadData)
+      this.".lcfirst($nomeComponent)."Service.save(uploadData)
         .subscribe(data => {
           form.fileimg = data.file
 
@@ -41,9 +43,9 @@ if($uparImage){
         response => {
           this.loader = false;
             if (response.status === 401) {
-              this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."Service.notify(\"não foi possivel salvar\");
+              this.".lcfirst($nomeComponent)."Service.notify(\"não foi possivel salvar\");
             } if (response.status === 0) {
-              this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."Service.notify(\"SERVIDOR OFFILINE\");
+              this.".lcfirst($nomeComponent)."Service.notify(\"SERVIDOR OFFILINE\");
             }
 
           },
@@ -56,19 +58,19 @@ if($uparImage){
 
   saveForm(form) {
     this.loader = true;
-    this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."Service.save(form)
+    this.".lcfirst($nomeComponent)."Service.save(form)
       .subscribe(data => {
-        this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."Service.notify(data.response);
-        this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."Service.goTo()
+        this.".lcfirst($nomeComponent)."Service.notify(data.response);
+        this.".lcfirst($nomeComponent)."Service.goTo()
         this.loader = false;
       },
       
       response => {true
         this.loader = false;
           if (response.status === 401) {
-            this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."Service.notify(\"não foi possivel salvar\");
+            this.".lcfirst($nomeComponent)."Service.notify(\"não foi possivel salvar\");
           } if (response.status === 0) {
-            this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."Service.notify(\"SERVIDOR OFFILINE\");
+            this.".lcfirst($nomeComponent)."Service.notify(\"SERVIDOR OFFILINE\");
           }
 
         },
@@ -133,7 +135,7 @@ foreach ($colunas as $key => $value) {
     $formInit[] ="fileimg: this.formBuilder.control('')";
   }else{
 	$formInitEmpty[] ="$value: this.formBuilder.control('', [Validators.required])";
-	$formInit[] ="$value: this.formBuilder.control(".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).".$value, [Validators.required])";
+	$formInit[] ="$value: this.formBuilder.control(".lcfirst($nomeComponent).".$value, [Validators.required])";
   }
 }
 
@@ -144,9 +146,9 @@ import { Component, OnInit } from \'@angular/core\';
 import { FormBuilder, FormControl, FormGroup,Validators } from \'@angular/forms\';
 import { ActivatedRoute } from \'@angular/router\';
 import { NotificationService } from \'../../shared/messages/notification.service\';
-import { '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).' } from \'./../'.$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'.model\'
-import { '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service } from \'./../'.$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'.service\';
-import { API_PATH_IMG } from \'./../../app.api\';
+import { '.ucfirst($nomeComponent).' } from \'./../'.$nameComponent.'.model\'
+import { '.ucfirst($nomeComponent).'Service } from \'./../'.$nameComponent.'.service\';
+'.$imports.'
 import { Observable } from \'rxjs\';
 
 @Component({
