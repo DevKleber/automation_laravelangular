@@ -1,7 +1,7 @@
 <?php
-$helpers = '';
+$helpersBe = '';
 $c = ucfirst($nameComponent);
-$helpers .=' 
+$helpersBe .=' 
 <?php
 class Helpers{
     public static function convertdateBr2DB($date){
@@ -97,7 +97,7 @@ class Helpers{
 ';
 
 //Criando arquivo
-if(file_force_contents($caminhoHelpers,$helpers)){
+if(file_force_contents($caminhoHelpers,$helpersBe)){
     @chmod($caminhoHelpers,0777);
     $msg['laravel']['app']['http'][] = 'Helpers.php';
 } else {

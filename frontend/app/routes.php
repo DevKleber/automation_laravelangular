@@ -75,20 +75,20 @@ function montarFileRoute($namerotaangular,$nameGetServices,$checkboxRotaApiProte
     }
 
     $routes ="import { Routes } from '@angular/router'
-    export const ROUTES: Routes = [
-        { path: '', component: AppComponent},
-        //{ path: 'login/:to', component: LoginComponent },
-        //{ path: 'login', component: LoginComponent },
-        
-        { path: '$namerotaangular', loadChildren: './$namerotaangular/$namerotaangular.module#".$nameGetServices."Module'$canLoad },
-        $rotaInserir
-        $rotaAlterar
-        $rotaDetalhar
-        
+export const ROUTES: Routes = [
+    { path: '', component: AppComponent},
+    //{ path: 'login/:to', component: LoginComponent },
+    //{ path: 'login', component: LoginComponent },
     
-        { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule', canLoad: [LoggedInGuard] },
-        { path: '**', redirectTo: 'not-found', pathMatch: 'full' },
-    ]";
+    { path: '$namerotaangular', loadChildren: './$namerotaangular/$namerotaangular.module#".$nameGetServices."Module'$canLoad },
+    $rotaInserir
+    $rotaAlterar
+    $rotaDetalhar
+    
+
+    { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule', canLoad: [LoggedInGuard] },
+    { path: '**', redirectTo: 'not-found', pathMatch: 'full' },
+]";
     return $routes;
 
 }
