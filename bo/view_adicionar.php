@@ -93,8 +93,8 @@ $gridDiv .='<?php '.$gridtop.'
 $caminhoboAdicionar = $caminho.'admin/includes/views/'.$nameComponent.'/';
 //Criando arquivo
 if(file_force_contents($caminhoboAdicionar . 'adicionar.php', $gridDiv)){
-    $msg['success'][] = $caminhoboAdicionar;
+    $msg['laravel'][] = $caminhoboAdicionar;
     @chmod($caminhoboAdicionar.'adicionar.php',0777);
 } else {
-    $msg['error'][] = $caminhoboAdicionar;
+    $msg['laravel'][] = 'ERROR|'.$caminhoboAdicionar;
 }

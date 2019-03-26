@@ -182,8 +182,8 @@ class '.$nameController.' extends Controller
 }';
 //Criando arquivo
 if (file_force_contents($caminhoControllerNamePhp,$controller)) {
-    $msg['success'][] = $caminhoControllerNamePhp;    
+    $msg['laravel']['app']['http']['controllers'][] = $nameControllerPhp;    
     @chmod($caminhoControllerNamePhp,0777);
 } else {
-    $msg['error'][] = $caminhoControllerNamePhp;
+    $msg['laravel']['app']['http']['controllers'][] = 'ERROR|'.$nameControllerPhp;
 }

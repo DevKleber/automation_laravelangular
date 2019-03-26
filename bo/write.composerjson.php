@@ -41,7 +41,7 @@ foreach ($array_texto as $line_num => $line) {
 }
 
 if($rota_existente){
-    $msg['warning'][] = 'Já existe a regra <small><b>('.$addfiles.')</b></small> em '.$caminhoComposer;
+    $msg['warning-laravel'][] = 'Já existe a regra <small><b>('.$addfiles.')</b></small> em '.$caminhoComposer;
 }else{
     //Pegando regra atual para concatenar com nova regra
     $textoOriginal = $array_texto[$posicaoAddUrl];
@@ -49,8 +49,8 @@ if($rota_existente){
     //Adicionando nova regra no local correto
     $array_texto[$posicaoAddUrl] =$textoOriginal."\n".$addfiles;
     if(file_force_contents($caminhoComposer,implode("\n",$array_texto))){
-        $msg['success'][] = $caminhoComposer;
+        $msg['laravel']['composer'][] = 'composer.json';
     }else{
-        $msg['error'][] = $caminhoComposer ;
+        $msg['laravel']['composer'][] = 'ERROR|composer.json' ;
     }   
 }

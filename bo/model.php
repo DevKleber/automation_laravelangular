@@ -25,8 +25,8 @@ class '.$c.' extends Model
 $caminhoModel = $caminhoModel.ucfirst($nameComponent).'.php';
 //Criando arquivo
 if (file_force_contents($caminhoModel,$modAdmin)) {
-    $msg['success'][] = $caminhoModel;    
+    $msg['laravel']['app'][] = $nameComponent.'.php';    
     @chmod($caminhoModel,0777);
 } else {
-    $msg['error'][] = $caminhoModel;
+    $msg['laravel']['app'][] = 'ERROR|'.$nameComponent.'.php';
 }

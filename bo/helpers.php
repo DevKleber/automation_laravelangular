@@ -99,8 +99,8 @@ class Helpers{
 //Criando arquivo
 if(file_force_contents($caminhoHelpers,$helpers)){
     @chmod($caminhoHelpers,0777);
-    $msg['success'][] = $caminhoHelpers;
+    $msg['laravel']['app']['http'][] = 'Helpers.php';
 } else {
-    $msg['error'][] = $caminhoHelpers ;
+    $msg['laravel']['app']['http'][] = 'ERROR|Helpers.php' ;
 }
 

@@ -9,8 +9,8 @@ $caminhobolistar = $caminho.'admin/includes/views/'.$nameComponent.'/';
 //Criando arquivo
 if(file_force_contents($caminhobolistar . "listar.php",$viewListar)){
     @chmod($caminhobolistar.'listar.php',0777);
-    $msg['success'][] = $caminhobolistar ;
+    $msg['laravel'][] = $caminhobolistar ;
 } else {
-    $msg['error'][] = $caminhobolistar;
+    $msg['laravel'][] = 'ERROR|'.$caminhobolistar;
 }
 

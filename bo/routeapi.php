@@ -32,7 +32,7 @@ foreach ($array_texto as $line_num => $line) {
 }
 
 if($rota_existente){
-    $msg['warning'][] = 'Já existe a regra <small><b>('.$rotanew.')</b></small> em '.$caminhoRouteApi;
+    $msg['warning-laravel'][] = 'Já existe a regra <small><b>('.$rotanew.')</b></small> em '.$caminhoRouteApi;
 }else{
     //Pegando regra atual para concatenar com nova regra
     $textoOriginal = $array_texto[$posicaoAddUrl];
@@ -43,8 +43,8 @@ if($rota_existente){
     }
     //Adicionando nova regra no local correto
     if(file_force_contents($caminhoRouteApi,implode("\n",$array_texto))){
-        $msg['success'][] = $caminhoRouteApi;
+        $msg['laravel']['routes'][] = 'api.php';
     }else{
-        $msg['error'][] = $caminhoRouteApi ;
+        $msg['laravel']['routes'][] = 'ERROR|api.php' ;
     }   
 }

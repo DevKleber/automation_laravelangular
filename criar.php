@@ -82,10 +82,7 @@ if(isset($criar_bo)){
 
 
 
-    // Mensagens de erros
-    if( isset($_POST['criar_fo']) || isset($_POST['criar_bo'])){
-        new Mensagem($msg);
-    }
+    
 }
 // die;
 if(isset($_POST['criar_fo'])){

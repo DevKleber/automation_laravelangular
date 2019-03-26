@@ -17,10 +17,10 @@ $save ='save(form) {
   }';
 $imports = "";
 if($uparImage){
-  $imports = "import { API_PATH_IMG } from \'./../../app.api\';";
-  $ifgetImg = "if('.lcfirst($nomeComponent).'.img){
-    this.img = `${API_PATH_IMG}/'.lcfirst($nomeComponent).'/${'.lcfirst($nomeComponent).'.img}`
-  }";
+  $imports = "import { API_PATH_IMG } from './../../app.api';";
+  $ifgetImg = "if(".lcfirst($nomeComponent).".img){
+        this.img = `\${API_PATH_IMG}/".$nameComponent."/\${".lcfirst($nomeComponent).".img}`
+      }";
   $variaveis .="img: any = 'assets/img/user/padrao.jpg';
   selectedFile: File;";
   

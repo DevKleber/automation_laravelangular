@@ -6,6 +6,8 @@ class Mensagem {
                  
         $success = $msg['success'];
         $warning = $msg['warning'];
+        $laravel = $msg['laravel'];
+        $warninglaravel = $msg['warning-laravel'];
 
         
         print "
@@ -27,6 +29,7 @@ class Mensagem {
             <div class="col-md-6 ">
                 <div class="backend">
                     <h3 class="text-center">Back-End</h3>
+                    <?php $this->setImage($laravel); ?>
                 </div>
             </div>
         </div>
