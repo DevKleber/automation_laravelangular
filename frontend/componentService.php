@@ -22,7 +22,7 @@ $insert = "save(form) {
 $update = "update(form,id) {
     return this.http.put(`\${API}/".$namerotaangular."/\${id}`, form)
     .subscribe((data) => {
-      if (data['dados']) {
+      if (data['response']) {
         this.notify('Registro Alterado Com Sucesso!');
         this.router.navigate(['/".$namerotaangular."'])
       }

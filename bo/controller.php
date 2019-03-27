@@ -84,7 +84,7 @@ if(!empty($filtrarPorToken)){
 if($uparImage){
     $store = '
     if ($request->hasFile(\'fileimg\')) {
-        if($img = Helpers::salveFile($request,\''.$nomeComponent.'\')){
+        if($img = Helpers::salveFile($request,\''.lcfirst($nomeComponent).'\')){
             return response(["response"=>"imagem movida com sucesso",\'file\'=>$img[\'file\']]);
         }
         }else{

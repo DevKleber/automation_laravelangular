@@ -13,12 +13,16 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http'
 import { NotificationService } from './messages/notification.service'
 
 // pipes
+import { SafeHtml } from '../pipes/safe-html.pipe';
+import { ImagemTipoarquivoPipe } from '../pipes/imagem-tipoarquivo.pipe';
 
 
 @NgModule({
     declarations: [
         InputComponent,
-        SnackbarComponent
+        SnackbarComponent,
+        SafeHtml,
+        ImagemTipoarquivoPipe
     ],
     
     imports: [
@@ -31,7 +35,9 @@ import { NotificationService } from './messages/notification.service'
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        SnackbarComponent
+        SnackbarComponent,
+        SafeHtml,
+        ImagemTipoarquivoPipe
     ]
 })
 export class SharedModule {

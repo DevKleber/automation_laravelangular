@@ -18,9 +18,16 @@ foreach ($colunasHtml as $key => $value) {
                                         </li>
                                         ';
     $montarTr.='<th>'.$value.'</th>
-                                ';
-    $td.=" <td>{{".$nameToLateNgFor."?.".$value."}}</td>
-								 ";
+								';
+	$format = '';
+	if($value == 'bo_ativo'){
+		$format = " | BooleanMessage:'bo_ativo_withbg'";
+		$td.=" <td [innerHtml]=\"".lcfirst($nameToLateNgFor)."?.".$value.$format."\"></td>
+								";
+	}else{
+		$td.=" <td>{{".lcfirst($nameToLateNgFor)."?.".$value.$format."}}</td>
+								";
+	}
 }
 
 
@@ -72,13 +79,13 @@ $html = '
 							</tr>
 						</thead>
 						<tbody>
-							<tr *ngFor="let '.$nameToLateNgFor.' of '.lcfirst($nameGetServices).'">
+							<tr *ngFor="let '.lcfirst($nameToLateNgFor).' of '.lcfirst($nameGetServices).'">
 								'.$td.'
                                 
                                 <td>
-                                    <i class="iconsListOptions pli-magnifi-glass" routerLink="/'.$namerotaangular.'/detalhar/{{'.$nameToLateNgFor.'?.'.$pk.'}}"></i>
-                                    <i class="iconsListOptions pli-pencil" routerLink="/'.$namerotaangular.'/alterar/{{'.$nameToLateNgFor.'?.'.$pk.'}}"></i>
-                                    <i class="iconsListOptions pli-trash" (click)="inativar('.$nameToLateNgFor.')"></i>
+                                    <i class="iconsListOptions pli-magnifi-glass" routerLink="/'.$namerotaangular.'/detalhar/{{'.lcfirst($nameToLateNgFor).'?.'.$pk.'}}"></i>
+                                    <i class="iconsListOptions pli-pencil" routerLink="/'.$namerotaangular.'/alterar/{{'.lcfirst($nameToLateNgFor).'?.'.$pk.'}}"></i>
+                                    <i class="iconsListOptions pli-trash" (click)="inativar('.lcfirst($nameToLateNgFor).')"></i>
 								</td>
 
 							</tr>

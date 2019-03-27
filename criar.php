@@ -114,6 +114,8 @@ if(isset($_POST['criar_fo'])){
     require_once("frontend/app/routes.php");
     $pastaShared = "shared";
     require_once("shared/index.php");
+    $pastaPipes = "pipes";
+    require_once("frontend/pipes/index.php");
     $pastaComponentView = $nameComponent;
     require_once("frontend/componentHtml.php");
     require_once("frontend/componentTs.php");

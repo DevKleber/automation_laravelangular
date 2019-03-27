@@ -115,6 +115,10 @@ function verificarSeRegraExiste($new,$encontrarPosicionar,$comparacao,$arquivo,$
         if($encontrarPosicionar == 'regra-0'){
             $posicaoAddUrl = 0;
         }
+        if($encontrarPosicionar == 'regra-ultimalinha'){
+            $posicaoAddUrl = count($array_texto);
+        }
+
         //Vericando se a URL nova já existe no arquivo .htaccess
         $explodeComparacao = explode($comparacao,$line);
         if(count($explodeComparacao)>1){

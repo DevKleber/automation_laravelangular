@@ -13,7 +13,7 @@ $componentName     = ucfirst($nomeComponent).'Component';
 $variaveis = '';
 $ifgetImg = "";
 $save ='save(form) {
-    this.'.lcfirst($nomeComponent).'Service.save(form)
+    this.'.lcfirst($nomeComponent).'Service.update(form,this.'.lcfirst($nomeComponent).'.'.$pk.')
   }';
 $imports = "";
 if($uparImage){
@@ -58,10 +58,10 @@ if($uparImage){
 
   saveForm(form) {
     this.loader = true;
-    this.".lcfirst($nomeComponent)."Service.save(form)
+    this.".lcfirst($nomeComponent)."Service.update(form,this.".lcfirst($nomeComponent).".".$pk.")
       .subscribe(data => {
-        this.".lcfirst($nomeComponent)."Service.notify(data.response);
-        this.".lcfirst($nomeComponent)."Service.goTo()
+        this.".lcfirst($nomeComponent)."Service.notify(data['response']);
+        this.".lcfirst($nomeComponent)."Service.goTo('".$namerotaangular."')
         this.loader = false;
       },
       

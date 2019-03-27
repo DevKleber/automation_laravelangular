@@ -55,15 +55,15 @@ export class '.$nomeComponent.'Component implements OnInit {
     });
   }
 
-  inativar('.$nameRemoverUltimo.') {
+  inativar('.lcfirst($nameRemoverUltimo).') {
 
     if (confirm(\'Você tem certeza que deseja remover o (a)  '.$componentName.' \')) {
       this.loader = true
-      this.'.lcfirst($nomeComponent).'Service.inativar('.$nameRemoverUltimo.'.id).subscribe((data) => {
-        if (data[\'dados\']) {
-          '.$nameRemoverUltimo.'.bo_ativo = false;
-          // this.'.$nameRecebeService.'.splice(this.'.$nameRecebeService.'.indexOf('.$nameRemoverUltimo.'),1)
-          this.notificationService.notify(`'.$nameRemoverUltimo.' inativado`)
+      this.'.lcfirst($nomeComponent).'Service.inativar('.lcfirst($nameRemoverUltimo).'.'.$pk.').subscribe((data) => {
+        if (data[\'response\']) {
+          '.lcfirst($nameRemoverUltimo).'.bo_ativo = 0;
+          // this.'.$nameRecebeService.'.splice(this.'.$nameRecebeService.'.indexOf('.lcfirst($nameRemoverUltimo).'),1)
+          this.notificationService.notify(`'.lcfirst($nameRemoverUltimo).' inativado`)
         }
         this.loader = false
       });
