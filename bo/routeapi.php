@@ -1,5 +1,5 @@
 <?php
-$nameController = ucfirst($nameComponent).'Controller';
+$nameController = ucfirst($nomeComponent).'Controller';
 
 $rota_existente = false;
 $rotanew = 'Route::resource(\''.$nomeRotaBE.'\',\''.$nameController.'\');';

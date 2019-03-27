@@ -1,7 +1,7 @@
 <?php
-$module = "import { NgModule } from '@angular/core'
-import { SharedModule } from '../../shared/shared.module'
-import { RouterModule, Routes } from '@angular/router'
+$module = "import { NgModule } from '@angular/core';
+import { SharedModule } from '../../shared/shared.module';
+import { RouterModule, Routes } from '@angular/router';
 import { DetalharComponent } from './detalhar.component';
 
 const ROUTES: Routes = [
@@ -16,7 +16,7 @@ const ROUTES: Routes = [
     RouterModule.forChild(ROUTES)
   ]
 })
-export class detalharModule { }";
+export class DetalharModule { }";
 
 //caminho onde vai ser criado o arquivo
 $caminhoInsertModule = $caminhoComponent.'/detalhar/detalhar.module.ts';

@@ -72,11 +72,11 @@ $html = '
 							</tr>
 						</thead>
 						<tbody>
-							<tr *ngFor="let '.$nameToLateNgFor.' of '.$nameGetServices.'">
+							<tr *ngFor="let '.$nameToLateNgFor.' of '.lcfirst($nameGetServices).'">
 								'.$td.'
                                 
                                 <td>
-                                    <i class="iconsListOptions pli-magnifi-glass" routerLink="/'.$namerotaangular.'/detalhar"></i>
+                                    <i class="iconsListOptions pli-magnifi-glass" routerLink="/'.$namerotaangular.'/detalhar/{{'.$nameToLateNgFor.'?.'.$pk.'}}"></i>
                                     <i class="iconsListOptions pli-pencil" routerLink="/'.$namerotaangular.'/alterar/{{'.$nameToLateNgFor.'?.'.$pk.'}}"></i>
                                     <i class="iconsListOptions pli-trash" (click)="inativar('.$nameToLateNgFor.')"></i>
 								</td>

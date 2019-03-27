@@ -8,11 +8,11 @@ $nameRemoverUltimo = $helpers->removerUltimoCaracter($nameGetServices);
 
 $nameRecebeService = lcfirst($nameGetServices);
 $nameGetServices   = ucfirst($nameGetServices);
-$componentName     = ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Component';
+$componentName     = ucfirst($nomeComponent).'Component';
 
 $variaveis = '';
 $save .='save(form) {
-    this.'.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service.save(form)
+    this.'.lcfirst($nomeComponent).'Service.save(form)
   }';
 if($uparImage){
   $variaveis .="img: any = 'assets/img/user/padrao.jpg';
@@ -27,7 +27,7 @@ if($uparImage){
     if (this.selectedFile) {
       this.loader = true;
       uploadData.append('fileimg', this.selectedFile, this.selectedFile.name);
-      this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."Service.save(uploadData)
+      this.".lcfirst($nomeComponent)."Service.save(uploadData)
         .subscribe(data => {
           form.fileimg = data.file
 
@@ -37,9 +37,9 @@ if($uparImage){
         response => {
           this.loader = false;
             if (response.status === 401) {
-              this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."Service.notify(\"não foi possivel salvar\");
+              this.".lcfirst($nomeComponent)."Service.notify(\"não foi possivel salvar\");
             } if (response.status === 0) {
-              this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."Service.notify(\"SERVIDOR OFFILINE\");
+              this.".lcfirst($nomeComponent)."Service.notify(\"SERVIDOR OFFILINE\");
             }
 
           },
@@ -52,19 +52,19 @@ if($uparImage){
 
   saveForm(form) {
     this.loader = true;
-    this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."Service.save(form)
+    this.".lcfirst($nomeComponent)."Service.save(form)
       .subscribe(data => {
-        this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."Service.notify(data.response);
-        this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."Service.goTo()
+        this.".lcfirst($nomeComponent)."Service.notify(data.response);
+        this.".lcfirst($nomeComponent)."Service.goTo()
         this.loader = false;
       },
       
       response => {true
         this.loader = false;
           if (response.status === 401) {
-            this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."Service.notify(\"não foi possivel salvar\");
+            this.".lcfirst($nomeComponent)."Service.notify(\"não foi possivel salvar\");
           } if (response.status === 0) {
-            this.".lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula)."Service.notify(\"SERVIDOR OFFILINE\");
+            this.".lcfirst($nomeComponent)."Service.notify(\"SERVIDOR OFFILINE\");
           }
 
         },
@@ -123,7 +123,9 @@ foreach ($colunas as $key => $value) {
   if(count($buscaImage)>1){
     $formInit[] ="fileimg: this.formBuilder.control('')";
   }else{
-	$formInit[] ="$value: this.formBuilder.control('', [Validators.required])";
+    if($value!="updated_at" and $value != "created_at" and $value != $pk){	
+      $formInit[] ="$value: this.formBuilder.control('', [Validators.required])";
+    }
   }
 }
 
@@ -136,8 +138,8 @@ import { Component, OnInit } from \'@angular/core\';
 import { FormBuilder, FormControl, FormGroup,Validators } from \'@angular/forms\';
 
 import { NotificationService } from \'../../shared/messages/notification.service\';
-import { '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).' } from \'./../'.$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'.model\'
-import { '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service } from \'./../'.$nameComponentTrocarUnderlinePorPrimieraMaiuscula.'.service\';
+import { '.ucfirst($nomeComponent).' } from \'./../'.$nameComponent.'.model\'
+import { '.ucfirst($nomeComponent).'Service } from \'./../'.$nameComponent.'.service\';
 
 import { Observable } from \'rxjs\';
 
@@ -147,12 +149,12 @@ import { Observable } from \'rxjs\';
   styleUrls: [\'./incluir.component.css\']
 })
 export class IncluirComponent implements OnInit {
-  '.$nameRecebeService.': '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).';
+  '.$nameRecebeService.': '.ucfirst($nomeComponent).';
   loader: boolean = true;
   form: FormGroup;
   '.$variaveis.'
 
-  constructor(private '.lcfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service: '.ucfirst($nameComponentTrocarUnderlinePorPrimieraMaiuscula).'Service, private formBuilder: FormBuilder, private notificationService: NotificationService) { }
+  constructor(private '.lcfirst($nomeComponent).'Service: '.ucfirst($nomeComponent).'Service, private formBuilder: FormBuilder, private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.initializeFormEmpty();

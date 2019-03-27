@@ -4,6 +4,8 @@ $codigos = '';
 if (!file_exists($pathRoutes)) {
     $codigos = montarFileRoute($namerotaangular,$nameGetServices,$checkboxRotaApiProtegidaToken,$inserir,$alterar,$detalhar);
 }else{
+    $new = "    { path: '**', redirectTo: 'not-found', pathMatch: 'full' },";
+    verificarSeRegraExiste($new,']',"path: '**'",$pathRoutes);
     // $new,$encontrarPosicionar,$comparacao,$arquivo,$posicaosalvar=1
     $ret = verificarSeRegraExiste("import { Routes } from '@angular/router'",'regra-0','import { Routes',$pathRoutes);
     if($ret!='alert')$msg['warning'][$pastaApi][] = $ret.' .info';
@@ -13,25 +15,25 @@ if (!file_exists($pathRoutes)) {
     }
     $new = 'export const ROUTES: Routes = [
 ]';
-    $newList = "        { path: '$namerotaangular', loadChildren: './$namerotaangular/$namerotaangular.module#".$nameGetServices."Module'$canLoad },";
-    $newInsert = "        { path: '$namerotaangular/incluir', loadChildren: './$namerotaangular/incluir/incluir.module#IncluirModule' $canLoad },";
-    $newAlterar = "        { path: '$namerotaangular/alterar/:id', loadChildren: './$namerotaangular/alterar/alterar.module#AlterarModule' $canLoad },";
-    $newDetalhar = "        { path: '$namerotaangular/detalhar/:id', loadChildren: './$namerotaangular/detalhar/detalhar.module#DetalharModule'$canLoad },";
+    $newList = "    { path: '$namerotaangular', loadChildren: './$namerotaangular/$namerotaangular.module#".$nomeComponent."Module'$canLoad },";
+    $newInsert = "    { path: '$namerotaangular/incluir', loadChildren: './$namerotaangular/incluir/incluir.module#IncluirModule' $canLoad },";
+    $newAlterar = "    { path: '$namerotaangular/alterar/:id', loadChildren: './$namerotaangular/alterar/alterar.module#AlterarModule' $canLoad },";
+    $newDetalhar = "    { path: '$namerotaangular/detalhar/:id', loadChildren: './$namerotaangular/detalhar/detalhar.module#DetalharModule'$canLoad },";
     
     $ret = verificarSeRegraExiste($new,'import { Routes }','export const ROUTES',$pathRoutes,2);
     if($ret!='alert')$msg['warning'][$pastaApi][] = $ret.' .info';
-    $ret = verificarSeRegraExiste($newList,"]","'$namerotaangular'",$pathRoutes);
+    $ret = verificarSeRegraExiste($newList,"path: '**'","'$namerotaangular'",$pathRoutes);
     if($ret!='alert')$msg['warning'][$pastaApi][] = $ret.' .info';
     if(!empty($inserir)){
-        $ret = verificarSeRegraExiste($newInsert,"]","'$namerotaangular/incluir'",$pathRoutes);
+        $ret = verificarSeRegraExiste($newInsert,"path: '**'","'$namerotaangular/incluir'",$pathRoutes);
         if($ret!='alert')$msg['warning'][$pastaApi][] = $ret.' .info';
     }    
     if(!empty($alterar)){
-        $ret = verificarSeRegraExiste($newAlterar,"]","'$namerotaangular/alterar/:id'",$pathRoutes);
+        $ret = verificarSeRegraExiste($newAlterar,"path: '**'","'$namerotaangular/alterar/:id'",$pathRoutes);
         if($ret!='alert')$msg['warning'][$pastaApi][] = $ret.' .info';
     }
     if(!empty($detalhar)){
-        $ret = verificarSeRegraExiste($newDetalhar,"]","'$namerotaangular/detalhar/:id'",$pathRoutes);
+        $ret = verificarSeRegraExiste($newDetalhar,"path: '**'","'$namerotaangular/detalhar/:id'",$pathRoutes);
         if($ret!='alert')$msg['warning'][$pastaApi][] = $ret.' .info';
     }
         
@@ -80,7 +82,7 @@ export const ROUTES: Routes = [
     //{ path: 'login/:to', component: LoginComponent },
     //{ path: 'login', component: LoginComponent },
     
-    { path: '$namerotaangular', loadChildren: './$namerotaangular/$namerotaangular.module#".$nameGetServices."Module'$canLoad },
+    { path: '$namerotaangular', loadChildren: './$namerotaangular/$namerotaangular.module#".$nomeComponent."Module'$canLoad },
     $rotaInserir
     $rotaAlterar
     $rotaDetalhar

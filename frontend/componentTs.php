@@ -55,7 +55,7 @@ export class '.$nomeComponent.'Component implements OnInit {
     });
   }
 
-  InativarDepoimento('.$nameRemoverUltimo.') {
+  inativar('.$nameRemoverUltimo.') {
 
     if (confirm(\'Você tem certeza que deseja remover o (a)  '.$componentName.' \')) {
       this.loader = true

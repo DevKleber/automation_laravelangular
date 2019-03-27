@@ -14,6 +14,7 @@ foreach ($colunas as $key => $value) {
 					";
 	  
   }else{
+		if($value!="updated_at" and $value != "created_at" and $value != $pk){	
 	$inputs .="
 					<div class='form-group is-empty col-md-4'>
 						<label class=\"control-label\" for='".$value."'>".$value."</label>
@@ -22,6 +23,7 @@ foreach ($colunas as $key => $value) {
 						</app-input-container>
 					</div>
 ";
+  }
   }
 }
 $html = "

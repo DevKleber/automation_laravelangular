@@ -1,9 +1,9 @@
 
 <?php
 
-$componentModule = "import { NgModule } from '@angular/core'
-import { SharedModule } from '../shared/shared.module'
-import { RouterModule, Routes } from '@angular/router'
+$componentModule = "import { NgModule } from '@angular/core';
+import { SharedModule } from '../shared/shared.module';
+import { RouterModule, Routes } from '@angular/router';
 import { ".$nomeComponent."Component } from './$nameComponent.component';
 
 const ROUTES: Routes = [

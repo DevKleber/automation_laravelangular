@@ -134,8 +134,10 @@ foreach ($colunas as $key => $value) {
     $formInitEmpty[] ="fileimg: this.formBuilder.control('')";
     $formInit[] ="fileimg: this.formBuilder.control('')";
   }else{
+    if($value!="updated_at" and $value != "created_at" and $value != $pk){	
 	$formInitEmpty[] ="$value: this.formBuilder.control('', [Validators.required])";
 	$formInit[] ="$value: this.formBuilder.control(".lcfirst($nomeComponent).".$value, [Validators.required])";
+  }
   }
 }
 
