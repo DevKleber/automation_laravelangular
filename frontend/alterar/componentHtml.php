@@ -15,14 +15,28 @@ foreach ($colunas as $key => $value) {
 	  
   }else{
 		if($value!="updated_at" and $value != "created_at" and $value != $pk){	
-	$inputs .="
+			if($value =='bo_ativo'){
+				$inputs .="
+					<div class='form-group is-empty col-md-4'>
+						<label class=\"control-label\" for='".$value."'>Ativo/Inativo</label>
+						<app-input-container errorMessage='Campo obrigatório' label='".$value."'>
+							<div class=\"onoffswitch\">
+								<input type=\"checkbox\" formControlName='".$value."' class=\"onoffswitch-checkbox\" id=\"myonoffswitch\" checked>
+								<label class=\"onoffswitch-label\" for=\"myonoffswitch\"></label>
+							</div>
+						</app-input-container>
+					</div>
+";			
+			}else{
+				$inputs .="
 					<div class='form-group is-empty col-md-4'>
 						<label class=\"control-label\" for='".$value."'>".$value."</label>
 						<app-input-container errorMessage='Campo obrigatório' label='".$value."'>
 							<input class='form-control' formControlName='".$value."' placeholder=''>
 						</app-input-container>
 					</div>
-";
+			";
+				}
   }
   }
 }

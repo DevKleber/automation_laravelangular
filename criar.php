@@ -116,6 +116,7 @@ if(isset($_POST['criar_fo'])){
     require_once("shared/index.php");
     $pastaPipes = "pipes";
     require_once("frontend/pipes/index.php");
+    require_once("frontend/src/index.php");
     $pastaComponentView = $nameComponent;
     require_once("frontend/componentHtml.php");
     require_once("frontend/componentTs.php");
@@ -157,4 +158,62 @@ function file_force_contents($dir, $contents){
     foreach($parts as $part)
         if(!is_dir($dir .= "/$part")) mkdir($dir,0777);
     return file_put_contents("$dir/$file", $contents);
+}
+
+function verificarSeRegraExiste($new,$encontrarPosicionar,$comparacao,$arquivo,$posicaosalvar=1,$achareparar = false){
+    $declarado = false;
+    $new = $new;
+    $pastaApi ='app';
+    $posicaoAddUrl = null;
+
+    $array_texto = file($arquivo,FILE_IGNORE_NEW_LINES);
+    $encontrarPosicionar = $encontrarPosicionar;
+    $comparacao = $comparacao;
+    //percorrendo arquivo
+    $i =0;
+    foreach ($array_texto as $line_num => $line) {
+        $i++;
+        
+        $explodeComposer = explode($encontrarPosicionar,$line);
+        if(count($explodeComposer)>1){
+            $posicaoAddUrl = $line_num;//Pegando a posição do array para adicionar a nova URL
+        }
+        if($encontrarPosicionar == 'regra-0'){
+            $posicaoAddUrl = 0;
+        }
+        if($encontrarPosicionar == 'regra-ultimalinha'){
+            $posicaoAddUrl = count($array_texto);
+        }
+        if($posicaoAddUrl!=null){
+            if($achareparar){
+                break;
+            }
+        }
+
+        //Vericando se a URL nova já existe no arquivo .htaccess
+        $explodeComparacao = explode($comparacao,$line);
+        if(count($explodeComparacao)>1){
+            $declarado = true; 
+            break;
+        }
+    }
+
+    if($declarado){
+        return 'alert';
+        // return'Já existe a regra <small><b>('.$new.')</b></small> em app.routes.ts';
+    }else{
+        //Pegando regra atual para concatenar com nova regra
+        $textoOriginal = $array_texto[$posicaoAddUrl];
+        if($posicaosalvar == 1){
+            $array_texto[$posicaoAddUrl] =$new."\n".$textoOriginal;
+        }else{
+            $array_texto[$posicaoAddUrl] =$textoOriginal."\n".$new;
+        }
+        //Adicionando nova regra no local correto
+        if(file_force_contents($arquivo,implode("\n",$array_texto))){
+            return $new .' <br />Adicionado routes.ts';
+        }else{
+            return false;
+        }   
+    }
 }

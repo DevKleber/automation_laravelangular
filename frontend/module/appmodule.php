@@ -24,22 +24,17 @@ foreach ($array_texto as $line_num => $line) {
 if(!$providersDeclarado){
 
     $declarado = false;
-    $new = '  providers: [{provide: ErrorHandler,useClass:ApplicationErrorHandler}],';
-    // FILE_IGNORE_NEW_LINES Não acrescentar a quebra de linha no final de cada elemento do array
+    $new = '  //providers: [{provide: ErrorHandler,useClass:ApplicationErrorHandler}],';
     $encontrarPosicionar = 'providers: [';
-    $comparacao = 'ErrorHandler';
-    
-    
-    //percorrendo arquivo
+    $comparacao = 'ErrorHandler';    
     $i =0;
     foreach ($array_texto as $line_num => $line) {
         $i++;
         
         $explodeComposer = explode($encontrarPosicionar,$line);
         if(count($explodeComposer)>1){
-            $posicaoAddUrl = $line_num;//Pegando a posição do array para adicionar a nova URL
+            $posicaoAddUrl = $line_num;
         }
-        //Vericando se a URL nova já existe no arquivo .htaccess
         $explodeComparacao = explode($comparacao,$line);
         if(count($explodeComparacao)>1){
             $declarado = true; 
@@ -50,20 +45,14 @@ if(!$providersDeclarado){
     if($declarado){
         $msg['warning'][] = 'Já existe a regra <small><b>('.$new.')</b></small> em app.module.ts .info ';
     }else{
-        //Pegando regra atual para concatenar com nova regra
         $textoOriginal = $array_texto[$posicaoAddUrl];
         
         $array_texto[$posicaoAddUrl] =$new;
-        //Adicionando nova regra no local correto
         if(file_force_contents($appModule,implode("\n",$array_texto))){
             $msg['success']['app'][] = 'app.module.ts';
-
-            //adicionando os imports do error
             $declarado = false;
-            $new = "import { ApplicationErrorHandler } from './app.error-handler';
+            $new = "//import { ApplicationErrorHandler } from './app.error-handler';
 import { ErrorHandler } from '@angular/core';";
-
-            // FILE_IGNORE_NEW_LINES Não acrescentar a quebra de linha no final de cada elemento do array
             $array_texto = file($appModule,FILE_IGNORE_NEW_LINES);
             $encontrarPosicionar = '@NgModule({';
             $comparacao = 'app.error-handler';
@@ -74,9 +63,8 @@ import { ErrorHandler } from '@angular/core';";
                 
                 $explodeComposer = explode($encontrarPosicionar,$line);
                 if(count($explodeComposer)>1){
-                    $posicaoAddUrl = $line_num;//Pegando a posição do array para adicionar a nova URL
+                    $posicaoAddUrl = $line_num;
                 }
-                //Vericando se a URL nova já existe no arquivo .htaccess
                 $explodeComparacao = explode($comparacao,$line);
                 if(count($explodeComparacao)>1){
                     $declarado = true; 
@@ -87,23 +75,24 @@ import { ErrorHandler } from '@angular/core';";
             if($declarado){
                 $msg['warning'][] = 'Já existe a regra <small><b>('.$new.')</b></small> em app.module.ts .info ';
             }else{
-                //Pegando regra atual para concatenar com nova regra
                 $textoOriginal = $array_texto[$posicaoAddUrl];
                 
                 $array_texto[$posicaoAddUrl] =$new."\n".$textoOriginal;
-                //Adicionando nova regra no local correto
                 if(file_force_contents($appModule,implode("\n",$array_texto))){
                     $msg['success']['app'][] = 'app.module.ts';
                 }else{
                     $msg['success']['app'][] = 'ERROR|app.module.ts';
                 }   
             }
-            //adicionando os imports do error
-
-
         }else{
             $msg['success']['app'][] = 'ERROR|app.module.ts';
-        }  
+        }
     }
 }
 
+$new = "import { HttpClientModule } from '@angular/common/http';";
+$http = verificarSeRegraExiste($new,'@NgModule({',"HttpClientModule",$appModule);
+if($http!='alert'){
+    $new = '    HttpClientModule,';
+    $http = verificarSeRegraExiste($new,'imports',"**forcandoabarra**",$appModule,2);
+}

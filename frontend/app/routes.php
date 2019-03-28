@@ -2,7 +2,7 @@
 $pathRoutes = $caminho.'app.routes.ts';
 $codigos = '';
 if (!file_exists($pathRoutes)) {
-    $codigos = montarFileRoute($namerotaangular,$nameGetServices,$checkboxRotaApiProtegidaToken,$inserir,$alterar,$detalhar);
+    $codigos = montarFileRoute($namerotaangular,$nameGetServices,$checkboxRotaApiProtegidaToken,$inserir,$alterar,$detalhar,$nomeComponent);
 }else{
     $new = "    { path: '**', redirectTo: 'not-found', pathMatch: 'full' },";
     verificarSeRegraExiste($new,']',"path: '**'",$pathRoutes);
@@ -38,6 +38,9 @@ if (!file_exists($pathRoutes)) {
     }
         
 }
+$new = "<router-outlet></router-outlet>";
+$ret = verificarSeRegraExiste($new,"regra-ultimalinha","<router-outlet>",$caminho."app.component.html");
+if($ret!='alert')$msg['success'][$pastaApi][] = 'app.component.html';
 
 $new = "import { RouterModule, PreloadAllModules } from '@angular/router'";
 $ret = verificarSeRegraExiste($new,"@NgModule({","@angular/router",$caminho."app.module.ts");
@@ -59,7 +62,7 @@ if($codigos !=''){
         $msg['success'][$pastaApi][] = 'ERROR|app.routes.ts';
     }           
 }
-function montarFileRoute($namerotaangular,$nameGetServices,$checkboxRotaApiProtegidaToken,$inserir,$alterar,$detalhar){
+function montarFileRoute($namerotaangular,$nameGetServices,$checkboxRotaApiProtegidaToken,$inserir,$alterar,$detalhar,$nomeComponent){
     $nameGetServices = ucfirst($nameGetServices);
     $canLoad = '';
     if($checkboxRotaApiProtegidaToken){
@@ -78,7 +81,7 @@ function montarFileRoute($namerotaangular,$nameGetServices,$checkboxRotaApiProte
 
     $routes ="import { Routes } from '@angular/router'
 export const ROUTES: Routes = [
-    { path: '', component: AppComponent},
+    //{ path: '', component: AppComponent},
     //{ path: 'login/:to', component: LoginComponent },
     //{ path: 'login', component: LoginComponent },
     
@@ -88,61 +91,9 @@ export const ROUTES: Routes = [
     $rotaDetalhar
     
 
-    { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule', canLoad: [LoggedInGuard] },
+    //{ path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule', canLoad: [LoggedInGuard] },
     { path: '**', redirectTo: 'not-found', pathMatch: 'full' },
 ]";
     return $routes;
 
-}
-
-function verificarSeRegraExiste($new,$encontrarPosicionar,$comparacao,$arquivo,$posicaosalvar=1){
-    $declarado = false;
-    $new = $new;
-    $pastaApi ='app';
-
-    $array_texto = file($arquivo,FILE_IGNORE_NEW_LINES);
-    $encontrarPosicionar = $encontrarPosicionar;
-    $comparacao = $comparacao;
-    //percorrendo arquivo
-    $i =0;
-    foreach ($array_texto as $line_num => $line) {
-        $i++;
-        
-        $explodeComposer = explode($encontrarPosicionar,$line);
-        if(count($explodeComposer)>1){
-            $posicaoAddUrl = $line_num;//Pegando a posição do array para adicionar a nova URL
-        }
-        if($encontrarPosicionar == 'regra-0'){
-            $posicaoAddUrl = 0;
-        }
-        if($encontrarPosicionar == 'regra-ultimalinha'){
-            $posicaoAddUrl = count($array_texto);
-        }
-
-        //Vericando se a URL nova já existe no arquivo .htaccess
-        $explodeComparacao = explode($comparacao,$line);
-        if(count($explodeComparacao)>1){
-            $declarado = true; 
-            break;
-        }
-    }
-
-    if($declarado){
-        return 'alert';
-        // return'Já existe a regra <small><b>('.$new.')</b></small> em app.routes.ts';
-    }else{
-        //Pegando regra atual para concatenar com nova regra
-        $textoOriginal = $array_texto[$posicaoAddUrl];
-        if($posicaosalvar == 1){
-            $array_texto[$posicaoAddUrl] =$new."\n".$textoOriginal;
-        }else{
-            $array_texto[$posicaoAddUrl] =$textoOriginal."\n".$new;
-        }
-        //Adicionando nova regra no local correto
-        if(file_force_contents($arquivo,implode("\n",$array_texto))){
-            return $new .' <br />Adicionado routes.ts';
-        }else{
-            return false;
-        }   
-    }
 }
