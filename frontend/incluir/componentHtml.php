@@ -43,7 +43,7 @@ $html = "
 				<!-- /.box-body -->
 
 				<div class='box-footer col-md-12'>
-					<button (click)='save(form.value)' [disabled]='!form.valid' class='btn btn-success'>Salvar</button>
+					<button (click)='save(form.value)' [disabled]='!form.valid' class='btn btn-primary'>Salvar</button>
 				</div>
 			</form>
 		</div>

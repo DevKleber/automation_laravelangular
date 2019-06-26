@@ -80,7 +80,7 @@ $gridDiv .='<?php '.$gridtop.'
 				        </div>
 			            <div class="clearfix"></div>
 					    <div class="form-actions">
-                            <button class="btn btn-success" name="stay" value="1">Editar</button>
+                            <button class="btn btn-primary" name="stay" value="1">Editar</button>
 					    </div>
                     </form>
     		    </div>	<!-- panel heading -->

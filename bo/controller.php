@@ -37,11 +37,11 @@ foreach ($colunasController as $key => $value) {
 $useToken = '';
 $construct = '';
 if(!empty($checkboxRotaFeProtegidaToken)){
-    $useToken = 'use Tymon\JWTAuth\JWTAuth;';
-    $construct = 'private $jwtAuth;
-    public function __construct(JWTAuth $jwtAuth)
+    $useToken = 'use JWTAuth;';
+    $construct = 'private $token;
+    public function __construct()
     {
-        $this->jwtAuth = $jwtAuth;
+        $this->token = JWTAuth::parseToken()->authenticate();
     }';
 }
 
@@ -53,13 +53,13 @@ $store = '';
 if(!empty($filtrarPorToken)){
     if(in_array($nameidtoken, $fk)) { 
         $requestToken = '$request[\''.$nameidtoken.'\'] = $this->token[\''.$nameidtoken.'\'];';
-        $where = '::where(\''.$nameidtoken.'\', $this->token[\''.$nameidtoken.'\'])->get().';
+        $where = '::where(\''.$nameidtoken.'\', $this->token[\''.$nameidtoken.'\'])->get()';
         $updateByToken = 'if($'.$nomeComponent.'[\''.$nameidtoken.'\'] != $this->token[\''.$nameidtoken.'\']){
             return response([\'error\'=>"Não tem permissão para alterar esse '.$nomeComponent.'"],400);
         }';
     }else if(count($fk)==1){
         $requestToken = '$request[\''.$fk[0].'\'] = $this->token[\''.$nameidtoken.'\'];';
-        $where = '::where(\''.$fk[0].'\', $this->token[\''.$nameidtoken.'\'])->get().';
+        $where = '::where(\''.$fk[0].'\', $this->token[\''.$nameidtoken.'\'])->get()';
         $updateByToken = 'if($'.$nomeComponent.'[\''.$fk[0].'\'] != $this->token[\''.$nameidtoken.'\']){
             return response([\'error\'=>"Não tem permissão para alterar esse '.$nomeComponent.'"],400);
         }';
