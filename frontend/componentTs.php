@@ -6,7 +6,11 @@ $fillable = "'".implode("','",$colunasHtml)."'";
 $c = ucfirst($componentName);
 $option = '';
 $td = '';
-
+$columns = '';
+foreach ($colunas as $key => $value) {
+  $columns.="columns['".$value."'] = { name: '".$value."', show: true }
+  ";
+}
 
 $nameRemoverUltimo = $helpers->removerUltimoCaracter($nameGetServices);
 foreach ($colunasHtml as $key => $value) {
@@ -20,6 +24,8 @@ import { FormBuilder, FormControl, FormGroup } from \'@angular/forms\';
 import { NotificationService } from \'../shared/messages/notification.service\';
 import { '.ucfirst($nomeComponent).' } from \'./'.$nameComponent.'.model\'
 import { '.ucfirst($nomeComponent).'Service } from \'./'.$nameComponent.'.service\';
+import { Helper } from \'../helper\';
+import { BreadcrumbService } from \'../layout/breadcrumb/breadcrumb.service\';
 
 import { Observable } from \'rxjs\';
 
@@ -35,18 +41,29 @@ export class '.$nomeComponent.'Component implements OnInit {
   loader: boolean = true;
   page: number = 1;
   itensPorPagina = 10;
+  order: any = {}
+  columns: any
 
-  constructor(private '.lcfirst($nomeComponent).'Service: '.ucfirst($nomeComponent).'Service, private fb: FormBuilder, private notificationService: NotificationService) { }
+  constructor(private '.lcfirst($nomeComponent).'Service: '.ucfirst($nomeComponent).'Service, private fb: FormBuilder, private notificationService: NotificationService, private helper: Helper, private breadcrumbService: BreadcrumbService) { }
 
   ngOnInit() {
     this.searchControl = this.fb.control(\'\')
     this.searchForm = this.fb.group({
       searchControl: this.searchControl
     })
-
+    this.breadcrumbService.chosenPagina("'.ucfirst($nomeComponent).'")
     this.get'.$nameGetServices.'();
+    this.order = this.helper.getColumnsByArray(clienteFornecedor[\'dados\'][0])
+		this.getColumnsShow(clienteFornecedor[\'dados\'][0]);
 
   }
+  getColumnsShow(ar) {
+
+		let columns = {}
+		'.$columns.'
+		
+		this.columns = columns;
+	}
 
   get'.$nameGetServices.'() {
     this.'.lcfirst($nomeComponent).'Service.get'.$nameGetServices.'().subscribe('.$nameRemoverUltimo.' => {
@@ -75,6 +92,12 @@ export class '.$nomeComponent.'Component implements OnInit {
   update(form) {
     this.'.lcfirst($nomeComponent).'Service.update(form, form.id)
   }
+  orderby(column) {
+    this.'.$nameRecebeService.' = this.helper.orderby(column, this.'.$nameRecebeService.', this.order);
+	}
+	hideshowColumns(column) {
+		this.columns[column].show = this.columns[column].show ? false : true
+	}
 }
 
 ';

@@ -73,6 +73,8 @@ if(!empty($filtrarPorToken)){
             $campo = "id_usuario";
         }else if (in_array("user", $fk)) { 
             $campo = "user";
+        }else{
+            $campo = 'id';
         }
         $requestToken = '$request[\''.$campo.'\'] = $this->token[\''.$nameidtoken.'\'];';
         $where = '::where(\''.$nameidtoken.'\', $this->token[\''.$nameidtoken.'\'])->get().';

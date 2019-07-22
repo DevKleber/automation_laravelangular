@@ -16,16 +16,17 @@ foreach ($colunasHtml as $key => $value) {
     $option.='<li role="menuitem">
                                             <label> <input type="checkbox" data-field="id_'.$value.'" value="'.$value.'" checked="checked"> '.$value.' </label>
                                         </li>
-                                        ';
-    $montarTr.='<th>'.$value.'</th>
+										';
+	
+    $montarTr.='<th *ngIf="columns?.'.$value.'.show"><span class="cursor-pointer" (click)="orderby(\'id\')">'.$value.'<i [className]="order?.id | helpers:\'iconorder\'"></i> </span></th>
 								';
 	$format = '';
 	if($value == 'bo_ativo'){
 		$format = " | BooleanMessage:'bo_ativo_withbg'";
-		$td.=" <td [innerHtml]=\"".lcfirst($nameToLateNgFor)."?.".$value.$format."\"></td>
+		$td.=" <td *ngIf=\"columns?.tp_risco.show\" [innerHtml]=\"".lcfirst($nameToLateNgFor)."?.".$value.$format."\"></td>
 								";
 	}else{
-		$td.=" <td>{{".lcfirst($nameToLateNgFor)."?.".$value.$format."}}</td>
+		$td.=" <td *ngIf=\"columns?.".$value.".show\">{{".lcfirst($nameToLateNgFor)."?.".$value.$format."}}</td>
 								";
 	}
 }
@@ -46,7 +47,7 @@ $html = '
 					<div class="row">
 						<div class="col-sm-6 table-toolbar-left">
 							<a [routerLink]="[\'/'.$namerotaangular.'/incluir\']"> <button class="btn btn-purple"><i class="pli-add icon-fw"></i>Add</button></a>
-							<button class="btn btn-default"><i class="pli-printer icon-lg"></i></button>
+							<button class="btn btn-default print"><i class="pli-printer icon-lg"></i></button>
 							<div class="btn-group">
 								<button class="btn btn-default" data-target="#sm-modal_'.$namerotaangular.'" data-toggle="modal"><i class="pli-information icon-lg"></i></button>
 								<button class="btn btn-default"><i class="pli-trash icon-lg"></i></button>
@@ -63,8 +64,12 @@ $html = '
 										<i class="pli-check"></i>
 									</button>
 
-									<ul class="dropdown-menu dropdown-menu-right" role="menu">
-										'.$option.'
+									<ul class="keep-open dropdown-menu dropdown-menu-right" role="menu">
+										<li class="open cursor-pointer" role="menuitem" *ngFor="let column of columns  | keyvalue" (click)="hideshowColumns(column.key)"> 
+											<ng-container *ngIf="column.value.show; else elseTemplate"> <i class="far fa-check-square"></i> </ng-container>
+											<ng-template #elseTemplate> <i class="far fa-square"></i> </ng-template>
+											{{column.value.name}}
+										</li>
 									</ul>
 								</div>
 							</div>

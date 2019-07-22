@@ -10,6 +10,10 @@
                 <div class="list-item-content-name"><?= DB_HOST . ' - ' . DB_NOME ?></div>
                 <form id="form" name="form"  >
                     <div class="list-item-content-text">
+                        <label class="edit-input"><b>Driver: </b></label>
+                        <input class="edit-input" type="text" value="<?= DB_DRIVER ?>"name="db_driver">
+                    </div>
+                    <div class="list-item-content-text">
                         <label class="edit-input"><b>Host: </b></label>
                         <input class="edit-input" type="text" value="<?= DB_HOST ?>"name="db_host">
                     </div>
