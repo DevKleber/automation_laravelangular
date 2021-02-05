@@ -1,5 +1,6 @@
 # automation_laravelangular
-Automação para projetos em angular e laravel api.
-Sem padrões de código 
+
+Automação para projetos em Angular e Lravel.  
+Sem padrões de código  
 
 ![demo](https://i.imgur.com/mepeUdy.png)
